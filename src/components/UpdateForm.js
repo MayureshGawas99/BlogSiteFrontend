@@ -41,36 +41,27 @@ const UpdateForm = ({ setUpdate }) => {
           // Handle the error or non-successful response here
           console.error("Request failed with status:", response.status);
         }
-        console.log(formData);
+        // console.log(formData);
       } catch (error) {
         console.error("Error:", error);
       }
     }
 
     try {
-      console.log(formData);
+      // console.log(formData);
       const { data } = await commonAxios.put("/api/v1/auth/update", formData, {
         headers: {
           "auth-token": localStorage.getItem("auth-token"),
         },
       });
 
-      console.log(data);
+      // console.log(data);
       setUser(data.user);
 
-      // const json = await response.json();
-      // if (json.success) {
-      //   console.log(json);
-      //   if (pic) {
-      //     window.location.reload();
-      //   }
       setTimeout(() => {
         enqueueSnackbar("Profile Updated Succesfully", { variant: "success" });
       }, 500);
       setUpdate(false);
-      // } else {
-      //   enqueueSnackbar("Update Unsuccessfull", { variant: "error" });
-      // }
     } catch (error) {
       console.log(error);
       enqueueSnackbar(error.response.data.message, {
