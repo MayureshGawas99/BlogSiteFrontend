@@ -30,7 +30,7 @@ const SignUpPage = () => {
           autoHideDuration: 3000,
         });
       }, 1000);
-      console.log(data);
+      // console.log(data);
     } catch (error) {
       console.log(error);
       enqueueSnackbar(error.response.data.message, {

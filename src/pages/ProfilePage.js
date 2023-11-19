@@ -28,7 +28,7 @@ const ProfilePage = () => {
             "auth-token": localStorage.getItem("auth-token"),
           },
         }); // Replace with your actual API endpoint
-        console.log(data);
+        // console.log(data);
         setMyBlogs(data.blogs);
       } catch (error) {
         console.error("Error fetching blogs:", error.message);

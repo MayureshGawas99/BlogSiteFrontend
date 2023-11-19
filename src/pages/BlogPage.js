@@ -23,7 +23,6 @@ const BlogPage = () => {
           }
         );
         setBlogData(data.blogs);
-        console.log(data);
       } catch (error) {
         console.log(error);
       }

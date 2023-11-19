@@ -19,7 +19,7 @@ const LoginPage = () => {
   }, []);
 
   const handleLogin = async (e) => {
-    console.log(process.env.REACT_APP_BACKEND_URL);
+    // console.log(process.env.REACT_APP_BACKEND_URL);
     try {
       e.preventDefault();
       const { data } = await commonAxios.post(`/api/v1/auth/login`, {
@@ -36,7 +36,7 @@ const LoginPage = () => {
           autoHideDuration: 3000,
         });
       }, 1000);
-      console.log(data);
+      // console.log(data);
     } catch (error) {
       console.log(error);
       enqueueSnackbar(error.response.data.message, {

@@ -51,7 +51,7 @@ export default function Modal({ action, blogid, btnName, setFetchagain }) {
         visibility,
         text,
       };
-      console.log(formData);
+      // console.log(formData);
       if (image) {
         const cloudinaryUrl =
           "https://api.cloudinary.com/v1_1/djuseai07/image/upload";
@@ -80,7 +80,7 @@ export default function Modal({ action, blogid, btnName, setFetchagain }) {
         },
       });
 
-      console.log(data);
+      // console.log(data);
       setTitle("");
       setImage(null);
       setVisibility("public");
@@ -106,7 +106,7 @@ export default function Modal({ action, blogid, btnName, setFetchagain }) {
         visibility,
         text,
       };
-      console.log(formData);
+      // console.log(formData);
       if (image) {
         const cloudinaryUrl =
           "https://api.cloudinary.com/v1_1/djuseai07/image/upload";
@@ -139,7 +139,7 @@ export default function Modal({ action, blogid, btnName, setFetchagain }) {
         }
       );
 
-      console.log(data);
+      // console.log(data);
       setTitle("");
       setImage(null);
       setVisibility("public");
@@ -172,7 +172,7 @@ export default function Modal({ action, blogid, btnName, setFetchagain }) {
         setTitle(data.blogs.title);
         setText(data.blogs.text);
         setVisibility(data.blogs.visibility);
-        console.log(data);
+        // console.log(data);
       } catch (error) {
         console.log(error);
       }

@@ -13,7 +13,7 @@ const HomePage = () => {
       try {
         const { data } = await commonAxios.get("/api/v1/blog/all"); // Replace with your actual API endpoint
         setBlogs(data.blogs);
-        console.log(data.blogs);
+        // console.log(data.blogs);
       } catch (error) {
         console.error("Error fetching blogs:", error.message);
       }

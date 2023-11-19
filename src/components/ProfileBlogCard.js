@@ -31,7 +31,7 @@ const ProfileBlogCard = ({ blog }) => {
       });
 
       let updatedlogs = myBlogs.filter((item) => item._id !== blogid);
-      console.log(updatedlogs);
+      // console.log(updatedlogs);
       setMyBlogs(updatedlogs);
       enqueueSnackbar("Deleted Successfully", {
         variant: "success",
