@@ -46,7 +46,7 @@ const ProfilePage = () => {
               <div className="flex flex-col items-center">
                 <img
                   src={user?.pic}
-                  className="w-32 h-32 bg-gray-300 rounded-full mb-4 shrink-0"
+                  className="w-32 h-32 bg-gray-300 rounded-full mb-4 shrink-0 object-cover"
                 />
                 <h1 className="text-xl font-bold">{user?.name}</h1>
                 <p className="text-gray-600">Email: {user?.email}</p>

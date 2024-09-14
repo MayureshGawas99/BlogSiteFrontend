@@ -8,6 +8,7 @@ import {
 } from "@material-tailwind/react";
 import { Link, useNavigate } from "react-router-dom";
 import { ProfileMenu } from "./ProfileMenu";
+import logo from "../assets/blogger.png";
 import { BlogContext } from "../context/BlogContext";
 
 export default function TopBar() {
@@ -90,7 +91,11 @@ export default function TopBar() {
     <div className="w-full ">
       <Navbar className="sticky top-0 z-10 h-max max-w-full rounded-none px-4 py-2  ">
         <div className="flex items-center justify-between text-blue-gray-900">
-          <Link to="/" className="mr-4 cursor-pointer py-1.5 font-bold text-xl">
+          <Link
+            to="/"
+            className="mr-4 cursor-pointer py-1.5 font-bold text-xl flex gap-2"
+          >
+            <img src={logo} className="h-10 w-10" />
             <Typography variant="h3" color="indigo">
               BlogSite
             </Typography>

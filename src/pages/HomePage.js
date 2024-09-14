@@ -43,14 +43,14 @@ const HomePage = () => {
         </figcaption>
       </figure>
 
-      <div className="container mt-5">
+      <div className="container my-5">
         <Typography
           className="text-3xl md:text-4xl lg:text-4xl font-bold"
           color="blue-gray"
         >
           Latest Blogs
         </Typography>
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-5 justify-items-center">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-5 justify-items-center mx-6">
           {blogs?.map((blog) => (
             <BlogCard key={blog.id} blog={blog} />
           ))}
