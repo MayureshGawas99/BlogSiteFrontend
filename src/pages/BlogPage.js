@@ -1,13 +1,19 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import commonAxios from "../components/AxiosInstance";
+import {
+  Avatar,
+  CardFooter,
+  Tooltip,
+  Typography,
+} from "@material-tailwind/react";
 
 const BlogPage = () => {
   const [blogData, setBlogData] = useState(null);
   const { blogid } = useParams();
   const getDate = (date) => {
     const inputDate = new Date(date);
-    const options = { month: "long", day: "numeric" };
+    const options = { month: "long", day: "numeric", year: "numeric" };
     const formattedDate = inputDate.toLocaleDateString("en-US", options);
     return formattedDate;
   };
@@ -23,6 +29,7 @@ const BlogPage = () => {
           }
         );
         setBlogData(data.blogs);
+        console.log(data.blogs);
       } catch (error) {
         console.log(error);
       }
@@ -43,10 +50,25 @@ const BlogPage = () => {
       )}
       <h2 className="text-2xl font-bold mb-4">{blogData?.title}</h2>
       <p className="text-gray-700 mb-4 text-justify">{blogData?.text}</p>
-      <div className="flex items-center justify-between text-sm text-gray-500">
-        <span>By {blogData?.user.name}</span>
-        <span>{getDate(blogData?.createdAt)}</span>
-      </div>
+      <CardFooter className="flex items-center justify-between">
+        <div className="flex items-center -space-x-3 text-sm text-gray-500">
+          <Tooltip content={blogData?.user.name}>
+            <div>
+              <Avatar
+                size="sm"
+                variant="circular"
+                alt="natali craig"
+                src={blogData?.user.pic}
+                className="border-2 border-white hover:z-10"
+              />
+              <span className="ml-2">By, {blogData?.user.name}</span>
+            </div>
+          </Tooltip>
+        </div>
+        <Typography className="font-normal text-sm text-gray-500">
+          {getDate(blogData?.createdAt)}
+        </Typography>
+      </CardFooter>
     </div>
   );
 };

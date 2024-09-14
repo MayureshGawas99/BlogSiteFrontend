@@ -13,7 +13,7 @@ import { useNavigate } from "react-router-dom";
 const BlogCard = ({ blog }) => {
   const navigate = useNavigate();
   const inputDate = new Date(blog.createdAt);
-  const options = { month: "long", day: "numeric" };
+  const options = { month: "long", day: "numeric", year: "numeric" };
   const formattedDate = inputDate.toLocaleDateString("en-US", options);
   return (
     <Card
