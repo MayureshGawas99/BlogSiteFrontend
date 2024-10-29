@@ -17,7 +17,7 @@ const BlogCard = ({ blog }) => {
   const formattedDate = inputDate.toLocaleDateString("en-US", options);
   return (
     <Card
-      className="w-full max-h-[30rem] overflow-hidden border-2 cursor-pointer"
+      className="w-full max-h-[30rem] overflow-hidden border-2  cursor-pointer"
       onClick={() => navigate(`/view/${blog._id}`)}
     >
       <CardHeader
@@ -37,13 +37,10 @@ const BlogCard = ({ blog }) => {
           {blog.title}
         </Typography>
         <div className="max-h-[7.2em] overflow-hidden">
-          <Typography
-            variant="small"
-            color="gray"
-            className="mt-3 font-normal line-clamp-3 text-justify"
-          >
-            {blog.text}
-          </Typography>
+          <div
+            className="mt-3 font-normal line-clamp-3 text-justify text-gray-700"
+            dangerouslySetInnerHTML={{ __html: blog.text }}
+          ></div>
         </div>
       </CardBody>
       <CardFooter className="flex items-center justify-between">

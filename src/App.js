@@ -10,15 +10,17 @@ import LoginPage from "./pages/LoginPage";
 import SignUpPage from "./pages/SignUpPage";
 import ProfilePage from "./pages/ProfilePage";
 import BlogPage from "./pages/BlogPage";
+import CreateBlogPage from "./pages/CreateBlogPage";
 
 function App() {
   return (
     <div className="App h-screen flex flex-col">
       <TopBar />
-      <div className="grow mt-3 w-full">
+      <div className="grow  w-full">
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/about" element={<AboutPage />} />
+          <Route path="/blog/:action" element={<CreateBlogPage />} />
           <Route path="/contactus" element={<ContactUsPage />} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/signup" element={<SignUpPage />} />

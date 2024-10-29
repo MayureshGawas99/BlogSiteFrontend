@@ -23,7 +23,7 @@ const HomePage = () => {
   }, []);
 
   return (
-    <div className="">
+    <div className="my-5">
       <figure className="relative h-96 w-full">
         <img
           className="h-96 w-full object-cover object-center"

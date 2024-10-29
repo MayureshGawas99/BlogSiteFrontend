@@ -69,26 +69,37 @@ const ProfileBlogCard = ({ blog }) => {
           {blog.title}
         </Typography>
         <div className="max-h-[7.2em] overflow-hidden">
-          <Typography
+          {/* <Typography
             variant="small"
             color="gray"
             className="mt-3 font-normal line-clamp-3 text-justify"
           >
             {blog.text}
-          </Typography>
+          </Typography> */}
+          <div
+            className="mt-3 font-normal line-clamp-3 text-justify text-gray-700"
+            dangerouslySetInnerHTML={{ __html: blog.text }}
+          ></div>
         </div>
       </CardBody>
       <CardFooter className="flex justify-between items-center">
         <div className="flex gap-3">
-          <Modal
+          {/* <Modal
             setFetchagain={setFetchagain}
             action={"update"}
             btnName={"Edit"}
             blogid={blog._id}
-          />
+          /> */}
           {/* <Button color="red" onClick={() => handleDelete(blog._id)}>
             Delete
           </Button> */}
+          <button
+            onClick={() => navigate(`/blog/edit?id=${blog._id}`)}
+            className="align-middle select-none font-sans font-bold text-center uppercase transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none text-xs py-3 px-6 rounded-lg bg-gradient-to-tr from-indigo-600 to-indigo-400 text-white shadow-md shadow-indigo-500/20 hover:shadow-lg hover:shadow-indigo-500/40 active:opacity-[0.85] block w-full"
+          >
+            Edit
+          </button>
+
           <DeleteModaL blog={blog} handleDelete={handleDelete} />
         </div>
         {blog.visibility === "private" && (

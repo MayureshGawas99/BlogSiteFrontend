@@ -2,4 +2,102 @@
 @tailwind components;
 @tailwind utilities;
 
+/* styles.css */
 
+/* Headings */
+h1 {
+  font-size: 2rem; /* Default size */
+  margin-bottom: 1rem; /* Default margin */
+}
+
+h2 {
+  font-size: 1.75rem; /* Default size */
+  margin-bottom: 0.75rem; /* Default margin */
+}
+
+h3 {
+  font-size: 1.5rem; /* Default size */
+  margin-bottom: 0.5rem; /* Default margin */
+}
+
+/* Paragraphs */
+
+/* Lists */
+ul,
+ol {
+  padding-left: 1.5em;
+}
+
+ul {
+  list-style: disc;
+}
+
+ol {
+  list-style: decimal;
+}
+
+li {
+  font-size: 1rem /* 16px */;
+  line-height: 1.5rem /* 24px */;
+}
+
+/* Links */
+a {
+  color: #1d4ed8; /* Default link color */
+  text-decoration: none; /* Underline links */
+}
+
+a:hover {
+  text-decoration: none; /* Remove underline on hover */
+}
+
+/* Bold and Italic */
+strong,
+b {
+  font-weight: bold; /* Default bold */
+}
+
+em,
+i {
+  font-style: italic; /* Default italic */
+}
+
+/* Underline */
+u {
+  text-decoration: underline; /* Underline text */
+}
+
+/* Strikethrough */
+del,
+s {
+  text-decoration: line-through; /* Strikethrough text */
+}
+
+/* Inputs */
+input,
+textarea {
+  padding: 0.5rem; /* Default padding */
+  border: 1px solid #d1d5db; /* Default border */
+  border-radius: 0.25rem; /* Default border radius */
+}
+
+/* Tables */
+table {
+  width: 100%; /* Full width */
+  border-collapse: collapse; /* Collapse borders */
+}
+
+th,
+td {
+  padding: 0.5rem; /* Default padding */
+  border: 1px solid #d1d5db; /* Default border */
+}
+
+th {
+  background-color: #f9fafb; /* Light background for header */
+}
+
+.ql-container {
+  overflow: auto;
+  flex-grow: 1;
+}

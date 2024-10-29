@@ -14,9 +14,12 @@ export default function DeleteModaL({ blog, handleDelete }) {
 
   return (
     <>
-      <Button onClick={handleOpen} color="red" variant="gradient">
+      <button
+        className="align-middle select-none font-sans font-bold text-center uppercase transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none text-xs py-3 px-6 rounded-lg bg-gradient-to-tr from-red-600 to-red-400 text-white shadow-md shadow-red-500/20 hover:shadow-lg hover:shadow-red-500/40 active:opacity-[0.85]"
+        onClick={handleOpen}
+      >
         Delete
-      </Button>
+      </button>
       <Dialog open={open} handler={handleOpen}>
         <DialogHeader>Do you want to delete the Blog?</DialogHeader>
         <DialogBody>
