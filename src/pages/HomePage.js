@@ -2,18 +2,16 @@ import React, { useContext, useEffect } from "react";
 import { BlogContext } from "../context/BlogContext";
 import { Typography } from "@material-tailwind/react";
 import blog from "../assets/blog2.jpg";
-import Dummy from "../context/Dummy";
 import BlogCard from "../components/BlogCard";
 import commonAxios from "../components/AxiosInstance";
 const HomePage = () => {
-  const { isLogin, blogs, setBlogs } = useContext(BlogContext);
+  const { blogs, setBlogs } = useContext(BlogContext);
 
   useEffect(() => {
     const getAllBlogs = async () => {
       try {
-        const { data } = await commonAxios.get("/api/v1/blog/all"); // Replace with your actual API endpoint
+        const { data } = await commonAxios.get("/api/v1/blog/all");
         setBlogs(data.blogs);
-        // console.log(data.blogs);
       } catch (error) {
         console.error("Error fetching blogs:", error.message);
       }
@@ -55,7 +53,6 @@ const HomePage = () => {
             <BlogCard key={blog.id} blog={blog} />
           ))}
         </div>
-        {/* {JSON.stringify(blogs)} */}
       </div>
     </div>
   );

@@ -9,7 +9,6 @@ const UpdateForm = ({ setUpdate }) => {
   const [name, setName] = useState(user.name);
   const [password, setPassword] = useState("");
   const [pic, setPic] = useState(null);
-  const navigate = useNavigate();
   const handleImageChange = (e) => {
     setPic(e.target.files[0]);
   };

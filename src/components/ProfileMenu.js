@@ -14,8 +14,7 @@ import commonAxios from "./AxiosInstance";
 
 export function ProfileMenu() {
   const navigate = useNavigate();
-  const { isLogin, setIsLogin, user, setUser, setActive } =
-    useContext(BlogContext);
+  const { setIsLogin, user, setUser, setActive } = useContext(BlogContext);
   useEffect(() => {
     const getUserInfo = async () => {
       try {
@@ -45,7 +44,7 @@ export function ProfileMenu() {
       </MenuHandler>
       <MenuList>
         <MenuItem
-          className="flex items-center gap-2"
+          className="flex items-center  gap-2"
           onClick={() => {
             setActive("Profile");
             navigate("/profile");

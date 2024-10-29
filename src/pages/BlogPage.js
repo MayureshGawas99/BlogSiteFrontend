@@ -50,7 +50,6 @@ const BlogPage = () => {
           </div>
         )}
         <h2 className="text-2xl font-bold mb-4">{blogData?.title}</h2>
-        {/* <div className="text-gray-700 mb-4 text-justify">{blogData?.text}</div> */}
         <div
           className="text-gray-700 mb-4 text-justify"
           dangerouslySetInnerHTML={{ __html: blogData?.text }}

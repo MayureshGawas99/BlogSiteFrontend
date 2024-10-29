@@ -1,18 +1,13 @@
 import React, { useContext, useEffect, useState } from "react";
 import { BlogContext } from "../context/BlogContext";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import UpdateForm from "../components/UpdateForm";
-import BlogCard from "../components/BlogCard";
 import commonAxios from "../components/AxiosInstance";
-import Dummy from "../context/Dummy";
 import ProfileBlogCard from "../components/ProfileBlogCard";
-import Modal from "../components/Modal";
-import { Button } from "@material-tailwind/react";
 import { FaPlus } from "react-icons/fa";
 
 const ProfilePage = () => {
-  const { user, myBlogs, setMyBlogs, fetchagain, setFetchagain } =
-    useContext(BlogContext);
+  const { user, myBlogs, setMyBlogs, fetchagain } = useContext(BlogContext);
   const [update, setUpdate] = useState(false);
 
   const navigate = useNavigate();
@@ -29,8 +24,7 @@ const ProfilePage = () => {
           headers: {
             "auth-token": localStorage.getItem("auth-token"),
           },
-        }); // Replace with your actual API endpoint
-        // console.log(data);
+        });
         setMyBlogs(data.blogs);
       } catch (error) {
         console.error("Error fetching blogs:", error.message);
@@ -47,6 +41,7 @@ const ProfilePage = () => {
             <div className="bg-white shadow rounded-lg p-6">
               <div className="flex flex-col items-center">
                 <img
+                  alt="profile pic"
                   src={user?.pic}
                   className="w-32 h-32 bg-gray-300 rounded-full mb-4 shrink-0 object-cover"
                 />
@@ -77,18 +72,7 @@ const ProfilePage = () => {
             <div className="bg-white shadow rounded-lg p-6">
               <div className="flex justify-between mb-4">
                 <h2 className="text-xl font-bold">My Blogs</h2>
-                {/* <button
-                  onClick={() => setUpdate(true)}
-                  className="bg-indigo-900 hover:bg-indigo-600 text-white py-2 px-4 rounded"
-                >
-                  Create Blog
-                </button> */}
-                {/* <Modal
-                  setFetchagain={setFetchagain}
-                  action={"create"}
-                  btnName={"Create Blog"}
-                  
-                /> */}
+
                 <button
                   onClick={() => navigate(`/blog/create`)}
                   className="flex flex-row gap-2 items-center align-middle select-none font-sans font-bold text-center uppercase transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none text-xs py-3 px-6 rounded-lg bg-gradient-to-tr from-indigo-600 to-indigo-400 text-white shadow-md shadow-indigo-500/20 hover:shadow-lg hover:shadow-indigo-500/40 active:opacity-[0.85] "

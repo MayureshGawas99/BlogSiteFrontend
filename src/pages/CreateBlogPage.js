@@ -1,15 +1,11 @@
 import React, { useEffect, useState } from "react";
 import {
   Button,
-  Dialog,
   Card,
-  CardHeader,
   CardBody,
   CardFooter,
   Typography,
   Input,
-  Checkbox,
-  Textarea,
   Radio,
 } from "@material-tailwind/react";
 import { enqueueSnackbar } from "notistack";
@@ -17,7 +13,6 @@ import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import commonAxios from "../components/AxiosInstance";
 import { useNavigate, useParams, useSearchParams } from "react-router-dom";
-import { WiStars } from "react-icons/wi";
 import { BsMagic } from "react-icons/bs";
 import TypingText from "../components/TypingText";
 
@@ -36,6 +31,12 @@ export default function CreateBlogPage() {
   const [visibility, setVisibility] = useState("public");
   const [image, setImage] = useState(null);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    if (!localStorage.getItem("auth-token")) {
+      navigate("/login");
+    }
+  }, []);
 
   const handleImageChange = (e) => {
     setImage(e.target.files[0]);
@@ -223,12 +224,7 @@ export default function CreateBlogPage() {
 
   return (
     <>
-      <div
-        // size="xl"
-        // open={open}
-        // className="bg-transparent shadow-none"
-        className="bg-gray-100 py-5"
-      >
+      <div className="bg-gray-100 py-5">
         <Card className="mx-auto w-[80%] ">
           <CardBody className="flex flex-col gap-4">
             <Typography variant="h4" color="blue-gray">
@@ -316,12 +312,7 @@ export default function CreateBlogPage() {
               )}
               {generatedBlog?.length > 0 && <TypingText text={generatedBlog} />}
             </div>
-            {/* <Textarea
-              label="Description"
-              value={text}
-              onChange={(e) => setText(e.target.value)}
-            /> */}
-            {/* <div dangerouslySetInnerHTML={{ __html: text }}></div> */}
+
             <ReactQuill
               className="h-[20rem] flex flex-col"
               theme="snow"
