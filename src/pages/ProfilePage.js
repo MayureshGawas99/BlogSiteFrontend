@@ -7,6 +7,8 @@ import commonAxios from "../components/AxiosInstance";
 import Dummy from "../context/Dummy";
 import ProfileBlogCard from "../components/ProfileBlogCard";
 import Modal from "../components/Modal";
+import { Button } from "@material-tailwind/react";
+import { FaPlus } from "react-icons/fa";
 
 const ProfilePage = () => {
   const { user, myBlogs, setMyBlogs, fetchagain, setFetchagain } =
@@ -81,11 +83,18 @@ const ProfilePage = () => {
                 >
                   Create Blog
                 </button> */}
-                <Modal
+                {/* <Modal
                   setFetchagain={setFetchagain}
                   action={"create"}
                   btnName={"Create Blog"}
-                />
+                  
+                /> */}
+                <button
+                  onClick={() => navigate(`/blog/create`)}
+                  className="flex flex-row gap-2 items-center align-middle select-none font-sans font-bold text-center uppercase transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none text-xs py-3 px-6 rounded-lg bg-gradient-to-tr from-indigo-600 to-indigo-400 text-white shadow-md shadow-indigo-500/20 hover:shadow-lg hover:shadow-indigo-500/40 active:opacity-[0.85] "
+                >
+                  <FaPlus size={16} /> <span>Create Blog</span>
+                </button>
               </div>
               <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8 mt-5 justify-items-center">
                 {myBlogs?.map((blog) => (
