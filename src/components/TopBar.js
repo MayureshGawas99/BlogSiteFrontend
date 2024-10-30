@@ -31,7 +31,7 @@ export default function TopBar() {
   }, []);
 
   const navList = (
-    <ul className="mt-2 mb-2 flex flex-col gap-2 lg:mb-0 lg:mt-0 lg:flex-row lg:items-center lg:gap-6">
+    <ul className="flex flex-col gap-2 mt-2 mb-2 lg:mb-0 lg:mt-0 lg:flex-row lg:items-center lg:gap-6">
       <Typography
         as="li"
         variant="small"
@@ -69,19 +69,19 @@ export default function TopBar() {
 
   return (
     <div className="w-full ">
-      <Navbar className="sticky top-0 z-10 h-max max-w-full rounded-none px-4 py-0 ">
+      <Navbar className="sticky top-0 z-10 max-w-full px-4 py-0 rounded-none h-max ">
         <div className="flex items-center justify-between text-blue-gray-900">
           <Link
             to="/"
             className="mr-4 cursor-pointer py-1.5 font-bold text-xl flex gap-2"
           >
-            <img src={logo} className="h-10 w-10" />
+            <img src={logo} className="w-10 h-10" />
             <Typography variant="h3" color="indigo" className="mb-0">
               BlogSite
             </Typography>
           </Link>
 
-          <div className="mr-4 hidden lg:block">{navList}</div>
+          <div className="hidden mr-4 lg:block">{navList}</div>
           <div className="flex items-center gap-4">
             <div className="flex items-center gap-x-2">
               {isLogin ? (
@@ -92,7 +92,7 @@ export default function TopBar() {
                     variant="text"
                     size="sm"
                     color="indigo"
-                    className="hidden lg:inline-block border-2 border-indigo-400 rounded-lg"
+                    className="hidden border-2 border-indigo-400 rounded-lg lg:inline-block"
                     onClick={() => {
                       navigate("/login");
                     }}
@@ -103,7 +103,7 @@ export default function TopBar() {
                     variant="gradient"
                     size="sm"
                     color="indigo"
-                    className="hidden lg:inline-block rounded-lg"
+                    className="hidden rounded-lg lg:inline-block"
                     onClick={() => {
                       navigate("/signup");
                     }}
@@ -115,7 +115,7 @@ export default function TopBar() {
             </div>
             <IconButton
               variant="text"
-              className="ml-auto h-6 w-6 text-inherit hover:bg-transparent focus:bg-transparent active:bg-transparent lg:hidden"
+              className="w-6 h-6 ml-auto text-inherit hover:bg-transparent focus:bg-transparent active:bg-transparent lg:hidden"
               ripple={false}
               onClick={() => setOpenNav(!openNav)}
             >
@@ -123,7 +123,7 @@ export default function TopBar() {
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
-                  className="h-6 w-6"
+                  className="w-6 h-6"
                   viewBox="0 0 24 24"
                   stroke="currentColor"
                   strokeWidth={2}
@@ -137,7 +137,7 @@ export default function TopBar() {
               ) : (
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
-                  className="h-6 w-6"
+                  className="w-6 h-6"
                   fill="none"
                   stroke="currentColor"
                   strokeWidth={2}
@@ -155,7 +155,7 @@ export default function TopBar() {
         <MobileNav open={openNav}>
           {navList}
           {!isLogin && (
-            <div className="flex items-center gap-x-1 mb-2 md:mb-0">
+            <div className="flex items-center mb-2 gap-x-1 md:mb-0">
               <Button
                 fullWidth
                 variant="text"
