@@ -31,7 +31,7 @@ export default function TopBar() {
   }, []);
 
   const navList = (
-    <ul className="mt-2 mb-4 flex flex-col gap-2 lg:mb-0 lg:mt-0 lg:flex-row lg:items-center lg:gap-6">
+    <ul className="mt-2 mb-2 flex flex-col gap-2 lg:mb-0 lg:mt-0 lg:flex-row lg:items-center lg:gap-6">
       <Typography
         as="li"
         variant="small"
@@ -69,14 +69,14 @@ export default function TopBar() {
 
   return (
     <div className="w-full ">
-      <Navbar className="sticky top-0 z-10 h-max max-w-full rounded-none px-4 py-2  ">
+      <Navbar className="sticky top-0 z-10 h-max max-w-full rounded-none px-4 py-0 ">
         <div className="flex items-center justify-between text-blue-gray-900">
           <Link
             to="/"
             className="mr-4 cursor-pointer py-1.5 font-bold text-xl flex gap-2"
           >
             <img src={logo} className="h-10 w-10" />
-            <Typography variant="h3" color="indigo">
+            <Typography variant="h3" color="indigo" className="mb-0">
               BlogSite
             </Typography>
           </Link>
@@ -92,7 +92,7 @@ export default function TopBar() {
                     variant="text"
                     size="sm"
                     color="indigo"
-                    className="hidden lg:inline-block"
+                    className="hidden lg:inline-block border-2 border-indigo-400 rounded-lg"
                     onClick={() => {
                       navigate("/login");
                     }}
@@ -103,7 +103,7 @@ export default function TopBar() {
                     variant="gradient"
                     size="sm"
                     color="indigo"
-                    className="hidden lg:inline-block"
+                    className="hidden lg:inline-block rounded-lg"
                     onClick={() => {
                       navigate("/signup");
                     }}
@@ -155,12 +155,12 @@ export default function TopBar() {
         <MobileNav open={openNav}>
           {navList}
           {!isLogin && (
-            <div className="flex items-center gap-x-1">
+            <div className="flex items-center gap-x-1 mb-2 md:mb-0">
               <Button
                 fullWidth
                 variant="text"
                 size="sm"
-                className=""
+                className="border-2 border-indigo-400 rounded-lg"
                 onClick={() => {
                   navigate("/login");
                 }}

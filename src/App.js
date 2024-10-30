@@ -15,7 +15,7 @@ function App() {
   return (
     <div className="App h-screen flex flex-col">
       <TopBar />
-      <div className="grow  w-full">
+      <div className="flex-grow  w-full">
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/about" element={<AboutPage />} />

@@ -1,4 +1,4 @@
-import { Input } from "@material-tailwind/react";
+import { Input, Typography } from "@material-tailwind/react";
 import axios from "axios";
 import React, { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -46,18 +46,18 @@ const LoginPage = () => {
     }
   };
   return (
-    <div className="g-6 flex h-full flex-wrap items-center  justify-center lg:justify-between">
-      {/* Left column container with background*/}
-      <div className="mb-12 md:mb-0 md:w-6/12 md:p-5 lg:w-6/12">
+    <div className="flex h-full login-bg  items-center  justify-center md:justify-start px-0 lg:px-20 md:px-16">
+      {/* <div className="mb-12 md:mb-0 md:w-6/12 md:p-5 lg:w-6/12">
         <img
           src="https://tecdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.svg"
           alt="Phone image"
         />
-      </div>
-      {/* Right column container with form */}
-      <div className="md:w-8/12 lg:px-10 lg:w-5/12 md:mt-2 sm:w-8/12 sm::mt-2">
+      </div> */}
+      <div className="md:w-8/12 lg:px-10 lg:w-5/12 md:mt-2 sm:w-8/12 sm::mt-2 glassmorphism">
         <form>
-          {/* Email input */}
+          <div className="text-lg md:text-3xl font-bold mb-5">
+            Start Blogging with us
+          </div>
           <div className="relative mb-6" data-te-input-wrapper-init>
             <Input
               size="lg"
@@ -69,7 +69,6 @@ const LoginPage = () => {
               }}
             />
           </div>
-          {/* Password input */}
           <div className="relative mb-6" data-te-input-wrapper-init>
             <Input
               size="lg"
@@ -81,34 +80,33 @@ const LoginPage = () => {
               }}
             />
           </div>
-          {/* Remember me checkbox */}
+          <div className="r">
+            <button
+              type="submit"
+              className="inline-block w-full  middle none center rounded-lg bg-light-blue-900 py-4 px-6 font-sans text-xs font-bold uppercase text-white shadow-md shadow-blue-500/20 transition-all hover:shadow-lg hover:shadow-blue-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
+              data-ripple-light="true"
+              onClick={(e) => handleLogin(e)}
+            >
+              LOG IN
+            </button>
+          </div>
 
-          {/* Submit button */}
-          <button
-            type="submit"
-            className="inline-block w-full  middle none center mr-4 rounded-lg bg-light-blue-900 py-4 px-6 font-sans text-xs font-bold uppercase text-white shadow-md shadow-blue-500/20 transition-all hover:shadow-lg hover:shadow-blue-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
-            data-ripple-light="true"
-            onClick={(e) => handleLogin(e)}
-          >
-            LOG IN
-          </button>
-          {/* Divider */}
-          <div className="my-4 flex items-center before:mt-0.5 before:flex-1 before:border-t before:border-neutral-300 after:mt-0.5 after:flex-1 after:border-t after:border-neutral-300">
+          {/* <div className="my-4 flex items-center  before:mt-0.5 before:flex-1 before:border-t before:border-black after:mt-0.5 after:flex-1 after:border-t after:border-black">
             <p className="mx-4 mb-0 text-center font-semibold dark:text-neutral-200">
               OR
             </p>
           </div>
-          {/* Social login buttons */}
-
-          <button
-            className="inline-block w-full  middle none center mr-4 rounded-lg bg-indigo-900 py-4 px-6 font-sans text-xs font-bold uppercase text-white shadow-md shadow-blue-500/20 transition-all hover:shadow-lg hover:shadow-blue-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
-            data-ripple-light="true"
-            onClick={() => {
-              navigate("/signup");
-            }}
-          >
-            Sign Up
-          </button>
+          <div className="">
+            <button
+              className="inline-block w-full  middle none center  rounded-lg bg-indigo-900 py-4 px-6 font-sans text-xs font-bold uppercase text-white shadow-md shadow-blue-500/20 transition-all hover:shadow-lg hover:shadow-blue-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
+              data-ripple-light="true"
+              onClick={() => {
+                navigate("/signup");
+              }}
+            >
+              Sign Up
+            </button>
+          </div> */}
         </form>
       </div>
     </div>
