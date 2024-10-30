@@ -43,7 +43,7 @@ const HomePage = () => {
 
       <div className="container my-5">
         <Typography
-          className="text-3xl md:text-4xl lg:text-4xl font-bold"
+          className="ml-6 text-3xl md:text-4xl lg:text-4xl font-bold"
           color="blue-gray"
         >
           Latest Blogs

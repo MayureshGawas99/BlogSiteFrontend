@@ -7,6 +7,7 @@ import {
   Typography,
   Input,
   Radio,
+  Tooltip,
 } from "@material-tailwind/react";
 import { enqueueSnackbar } from "notistack";
 import ReactQuill from "react-quill";
@@ -15,6 +16,7 @@ import commonAxios from "../components/AxiosInstance";
 import { useNavigate, useParams, useSearchParams } from "react-router-dom";
 import { BsMagic } from "react-icons/bs";
 import TypingText from "../components/TypingText";
+import { MdSend } from "react-icons/md";
 
 export default function CreateBlogPage() {
   const { action } = useParams();
@@ -50,6 +52,12 @@ export default function CreateBlogPage() {
 
   const generateBlog = async () => {
     try {
+      if (!prompt) {
+        setTimeout(() => {
+          enqueueSnackbar("Description is required", { variant: "error" });
+        }, 500);
+        return;
+      }
       setLoading(true);
       const { data } = await commonAxios.post(
         "/api/v1/blog/generate-blog",
@@ -251,37 +259,42 @@ export default function CreateBlogPage() {
               onChange={(e) => handleImageChange(e)}
               size="lg"
             />
-            <Typography className="-mb-2" variant="h6">
+            {/* <Typography className="-mb-2" variant="h6">
               Blog Content
-            </Typography>
+            </Typography> */}
             <div>
               <div className="flex flex-row justify-between items-center">
-                <Typography className="-mb-2" variant="p">
+                {/* <p className="text-xs md:text-sm ">
                   Stuck? Need help ? Use our AI assistant
+                </p> */}
+                <Typography className="-mb-2" variant="h6">
+                  Blog Content
                 </Typography>
-                <Button
-                  color="purple"
-                  variant="gradient"
-                  className="p-2"
-                  onClick={handleOpen}
-                >
-                  <BsMagic size={24} />
-                  {/* <WiStars size={32} /> */}
-                </Button>
+                <Tooltip content="Stuck? Need help ? Use our AI assistant">
+                  <Button
+                    color="purple"
+                    variant="gradient"
+                    className="p-2"
+                    onClick={handleOpen}
+                  >
+                    <BsMagic size={24} />
+                    {/* <WiStars size={32} /> */}
+                  </Button>
+                </Tooltip>
               </div>
               {open && (
                 <div className="mt-2 flex flex-row gap-2 ">
                   <Input
                     label="Describe your Blog"
                     required
-                    size="lg"
+                    className="w-auto"
                     value={prompt}
                     onChange={(e) => setPrompt(e.target.value)}
                   />
                   <Button
                     color="green"
                     variant="gradient"
-                    className=" overflow-visible "
+                    className=" overflow-visible  p-2"
                     onClick={generateBlog}
                   >
                     {loading ? (
@@ -305,7 +318,8 @@ export default function CreateBlogPage() {
                         <span className="sr-only">Loading...</span>
                       </div>
                     ) : (
-                      <span>Generate</span>
+                      // <span>Generate</span>
+                      <MdSend size={16} />
                     )}
                   </Button>
                 </div>

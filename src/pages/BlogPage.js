@@ -7,6 +7,8 @@ import {
   Tooltip,
   Typography,
 } from "@material-tailwind/react";
+import { FaHeart, FaRegComments, FaRegHeart } from "react-icons/fa";
+import { LiaCommentSolid } from "react-icons/lia";
 
 const BlogPage = () => {
   const [blogData, setBlogData] = useState(null);
@@ -38,43 +40,51 @@ const BlogPage = () => {
   }, []);
 
   return (
-    <div className="flex justify-center">
+    <div className="flex justify-center bg-gray-100">
       <div className="w-[90%] my-8 p-6 bg-white rounded-md shadow-md">
+        <CardFooter className="flex items-center flex-row gap-2 cursor-pointer p-0">
+          <Avatar
+            size="md"
+            variant="circular"
+            alt="natali craig"
+            src={blogData?.user.pic}
+            className="border-2 border-white hover:z-10"
+          />
+          <div className="flex flex-col md:flex-row md:items-center md:justify-between flex-grow text-sm text-gray-500">
+            <div className="text-base text-black"> {blogData?.user.name}</div>
+            <Typography className="font-normal text-sm text-gray-500">
+              On, {getDate(blogData?.createdAt)}
+            </Typography>
+          </div>
+        </CardFooter>
+        <hr class="h-[2px] my-5 bg-gray-200 border-0 dark:bg-gray-700"></hr>
         {blogData?.image && (
           <div className="flex justify-center">
             <img
               src={blogData?.image}
               alt={blogData?.title}
-              className="mb-4 rounded-lg "
+              className="mb-4 rounded-lg w-auto"
             />
           </div>
         )}
-        <h2 className="text-2xl font-bold mb-4">{blogData?.title}</h2>
+        <h2 className="text-2xl font-bold ">{blogData?.title}</h2>
         <div
           className="text-gray-700 mb-4 text-justify"
           dangerouslySetInnerHTML={{ __html: blogData?.text }}
         ></div>
-        <CardFooter className="flex items-center justify-between">
-          <div className="flex items-center -space-x-3 text-sm text-gray-500">
-            <Tooltip content={blogData?.user.name}>
-              <div className="flex flex-row gap-1 items-center">
-                <Avatar
-                  size="sm"
-                  variant="circular"
-                  alt="natali craig"
-                  src={blogData?.user.pic}
-                  className="border-2 border-white hover:z-10"
-                />
-                <span className="ml-2 hidden md:block">
-                  By, {blogData?.user.name}
-                </span>
-              </div>
-            </Tooltip>
+        {/* <hr class="h-[2px] my-5 bg-gray-200 border-0 dark:bg-gray-700"></hr>
+
+        <div className="flex flex-row gap-5">
+          <div className="flex flex-row gap-1 items-center">
+            <FaRegHeart /> <span>50</span>
           </div>
-          <Typography className="font-normal text-sm text-gray-500">
-            {getDate(blogData?.createdAt)}
-          </Typography>
-        </CardFooter>
+          <div className="flex flex-row gap-1 items-center">
+            <FaHeart className="text-red-500" /> <span>50</span>
+          </div>
+          <div className="flex flex-row gap-1 items-center">
+            <LiaCommentSolid size={20} /> <span>10</span>
+          </div>
+        </div> */}
       </div>
     </div>
   );
