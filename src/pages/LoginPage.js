@@ -64,9 +64,9 @@ const LoginPage = () => {
               label="Email"
               type="email"
               required
-              className="text-black placeholder-shown:border-black placeholder-shown:border-t-black"
+              className="text-black !border-black !border-t-black"
               labelProps={{
-                className: "peer-placeholder-shown:text-black", // Style the label for dark theme
+                className: "!text-black", // Style the label for dark theme
               }}
               onChange={(e) => {
                 setEmail(e.target.value);
@@ -79,9 +79,9 @@ const LoginPage = () => {
               label="Password"
               type="password"
               required
-              className="text-black placeholder-shown:border-black placeholder-shown:border-t-black"
+              className="text-black !border-black !border-t-black"
               labelProps={{
-                className: "peer-placeholder-shown:text-black", // Style the label for dark theme
+                className: "!text-black", // Style the label for dark theme
               }}
               onChange={(e) => {
                 setPassword(e.target.value);
