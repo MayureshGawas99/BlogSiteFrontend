@@ -64,7 +64,7 @@ const LoginPage = () => {
               label="Email"
               type="email"
               required
-              className="text-black !border-black !border-t-black"
+              className="text-black !border-black focus:border-t-0"
               labelProps={{
                 className: "!text-black", // Style the label for dark theme
               }}
@@ -79,7 +79,7 @@ const LoginPage = () => {
               label="Password"
               type="password"
               required
-              className="text-black !border-black !border-t-black"
+              className="text-black !border-black focus:border-t-0"
               labelProps={{
                 className: "!text-black", // Style the label for dark theme
               }}

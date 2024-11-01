@@ -38,7 +38,7 @@ const SignUpPage = () => {
     }
   };
   return (
-    <div className="flex items-center justify-center h-full px-0 login-bg md:justify-start lg:px-20 md:px-16">
+    <div className="flex items-center justify-center h-full px-0 login-bg md:justify-end lg:px-20 md:px-16">
       <div className="w-10/12 md:w-8/12 lg:px-10 lg:w-5/12 glassmorphism ">
         <form>
           <div className="mb-5 text-lg font-bold md:text-3xl">
@@ -50,9 +50,9 @@ const SignUpPage = () => {
               label="Name"
               type="text"
               required
-              className="text-black !border-black !border-t-black"
+              className="text-black !border-black focus:border-t-0  "
               labelProps={{
-                className: "!text-black", // Style the label for dark theme
+                className: "!text-black z-20 ", // Style the label for dark theme
               }}
               onChange={(e) => {
                 setName(e.target.value);
@@ -65,7 +65,7 @@ const SignUpPage = () => {
               label="Email"
               type="email"
               required
-              className="text-black !border-black !border-t-black"
+              className="text-black !border-black focus:border-t-0"
               labelProps={{
                 className: "!text-black", // Style the label for dark theme
               }}
@@ -80,7 +80,7 @@ const SignUpPage = () => {
               label="Password"
               type="password"
               required
-              className="text-black !border-black !border-t-black "
+              className="text-black !border-black focus:border-t-0 "
               labelProps={{
                 className: "!text-black", // Style the label for dark theme
               }}
