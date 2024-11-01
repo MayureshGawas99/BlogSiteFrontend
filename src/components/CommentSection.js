@@ -13,22 +13,20 @@ import { BlogContext } from "../context/BlogContext";
 import axios from "axios";
 import Spinner from "./Spinner";
 
-function CommentSection({ blogId }) {
+function CommentSection({ blog }) {
   const [comment, setComment] = useState("");
   const [comments, setComments] = useState([]);
   const [loading, setLoading] = useState(false);
+  const getTotalPages = (count, per) => {
+    let total = count / per;
+    return Math.ceil(total);
+  };
+  const [totalPages, setTotalPages] = useState(0);
+
+  const [currentPage, setCurrentPage] = useState(1);
   const { user, fetchCommentsAgain, setFetchCommentsAgain } =
     useContext(BlogContext);
-  //   const {
-  //     jwt,
-  //     comments,
-  //     setComments,
-  //     deleteId,
-  //     loading,
-  //     setLoading,
-  //     elasticId,
-  //   } = React.useContext(AppContext);
-  //   const [comment, setComment] = useState<string>("");
+
   const addComment = async (parent = null) => {
     try {
       if (!user) {
@@ -36,8 +34,7 @@ function CommentSection({ blogId }) {
         return;
       }
       if (comment === "") return;
-      const body = { content: comment, parent, blogId };
-      console.log(body);
+      const body = { content: comment, parent, blogId: blog?._id };
       const data = await commonAxios.post("/api/v1/comment/create", body, {
         headers: {
           "auth-token": localStorage.getItem("auth-token"),
@@ -58,15 +55,15 @@ function CommentSection({ blogId }) {
     try {
       setLoading(true);
       const { data } = await commonAxios.get(
-        `/api/v1/comment/get-comments/${blogId}`,
+        `/api/v1/comment/get-comments/${blog?._id}?page=${currentPage}`,
         {
           headers: {
             "auth-token": localStorage.getItem("auth-token"),
           },
         }
       );
-      console.log(data);
-      setComments(data);
+
+      setComments([...data]);
     } catch (error) {
       console.log(error);
     } finally {
@@ -75,10 +72,11 @@ function CommentSection({ blogId }) {
   };
 
   useEffect(() => {
-    if (blogId) {
+    if (blog?._id) {
       fetchComments();
+      setTotalPages(getTotalPages(blog?.commentCount, 5));
     }
-  }, [blogId, fetchCommentsAgain]);
+  }, [blog, currentPage, fetchCommentsAgain]);
 
   return (
     <div className="w-[90%] mx-6 my-5 p-6 lg:mx-32  bg-white rounded-md shadow-md">
@@ -113,14 +111,23 @@ function CommentSection({ blogId }) {
         <div>
           {comments?.map((comment, index) => {
             return (
-              <CommentCard
-                key={index}
-                comment={comment}
-                replyDepth={0}
-                blogId={comment.blogId}
-              />
+              <div key={index}>
+                <CommentCard
+                  comment={comment}
+                  replyDepth={0}
+                  blogId={comment.blogId}
+                />
+              </div>
             );
           })}
+          {currentPage < totalPages && (
+            <div
+              className="font-bold cursor-pointer"
+              onClick={() => setCurrentPage((prev) => prev + 1)}
+            >
+              See More Comments
+            </div>
+          )}
         </div>
       )}
     </div>

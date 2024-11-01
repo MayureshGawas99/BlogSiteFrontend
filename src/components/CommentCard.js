@@ -98,7 +98,6 @@ function CommentCard({ comment, replyDepth, blogId }) {
         parent,
         blogId: comment.blogId,
       };
-      console.log(body);
       const data = await commonAxios.post("/api/v1/comment/create", body, {
         headers: {
           "auth-token": localStorage.getItem("auth-token"),
@@ -146,7 +145,6 @@ function CommentCard({ comment, replyDepth, blogId }) {
       const { data } = await commonAxios.get(
         `/api/v1/comment/get-replies/${comment?._id}`
       );
-      console.log(data);
       setReplies(data);
     } catch (error) {
       console.log(error);
@@ -280,12 +278,6 @@ function CommentCard({ comment, replyDepth, blogId }) {
               onChange={(e) => setReply(e.target.value)}
             ></input>
             <div className="flex justify-start">
-              {/* <button
-                // onClick={submitReply}
-                className="px-2 py-1 mb-2 text-white transition-colors duration-500 border-2 border-solid rounded-md border-secondary hover:bg-secondary hover:border-secondary"
-              >
-                {state === "reply" ? "Submit" : "Edit"}
-              </button> */}
               <Button
                 variant="gradient"
                 size="sm"

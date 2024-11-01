@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import commonAxios from "../components/AxiosInstance";
 import {
@@ -11,17 +11,37 @@ import { FaHeart, FaRegComments, FaRegHeart } from "react-icons/fa";
 import { LiaCommentSolid } from "react-icons/lia";
 import Spinner from "../components/Spinner";
 import CommentSection from "../components/CommentSection";
+import { BlogContext } from "../context/BlogContext";
+import { enqueueSnackbar } from "notistack";
 
 const BlogPage = () => {
   const [blogData, setBlogData] = useState(null);
   const { blogid } = useParams();
   const [loading, setLoading] = useState(false);
+  const [isBlogLiked, setIsBlogLiked] = useState(false);
+  const { fetchCommentsAgain, setFetchCommentsAgain } = useContext(BlogContext);
   const getDate = (date) => {
     const inputDate = new Date(date);
     const options = { month: "long", day: "numeric", year: "numeric" };
     const formattedDate = inputDate.toLocaleDateString("en-US", options);
     return formattedDate;
   };
+
+  const likeBlog = async () => {
+    try {
+      const { data } = await commonAxios.get(`/api/v1/blog/like/${blogid}`, {
+        headers: {
+          "auth-token": localStorage.getItem("auth-token"),
+        },
+      });
+      enqueueSnackbar(data.message, { variant: "success" });
+      setIsBlogLiked(!isBlogLiked);
+      setFetchCommentsAgain(!fetchCommentsAgain);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   useEffect(() => {
     const getBlogDetails = async () => {
       try {
@@ -35,6 +55,7 @@ const BlogPage = () => {
           }
         );
         setBlogData(data.blogs);
+        setIsBlogLiked(data.isBlogLiked);
         console.log(data.blogs);
       } catch (error) {
         console.log(error);
@@ -43,7 +64,7 @@ const BlogPage = () => {
       }
     };
     getBlogDetails(blogid);
-  }, []);
+  }, [fetchCommentsAgain]);
 
   return (
     <div className="flex flex-col items-center h-full bg-gray-100">
@@ -85,23 +106,27 @@ const BlogPage = () => {
               className="mb-4 text-justify text-gray-700"
               dangerouslySetInnerHTML={{ __html: blogData?.text }}
             ></div>
-            {/* <hr class="h-[2px] my-5 bg-gray-200 border-0 dark:bg-gray-700"></hr>
+            <hr class="h-[2px] my-5 bg-gray-200 border-0 dark:bg-gray-700"></hr>
 
-<div className="flex flex-row gap-5">
-<div className="flex flex-row items-center gap-1">
-  <FaRegHeart /> <span>50</span>
-</div>
-<div className="flex flex-row items-center gap-1">
-  <FaHeart className="text-red-500" /> <span>50</span>
-</div>
-<div className="flex flex-row items-center gap-1">
-  <LiaCommentSolid size={20} /> <span>10</span>
-</div>
-</div> */}
+            <div className="flex flex-row gap-5">
+              <div className="flex flex-row items-center gap-1">
+                {isBlogLiked ? (
+                  <FaHeart className="text-red-500" onClick={likeBlog} />
+                ) : (
+                  <FaRegHeart onClick={likeBlog} />
+                )}{" "}
+                <span>{blogData?.likeCount}</span>
+              </div>
+
+              <div className="flex flex-row items-center gap-1">
+                <LiaCommentSolid size={20} />{" "}
+                <span>{blogData?.totalCommentCount}</span>
+              </div>
+            </div>
           </div>
         )}
       </div>
-      <CommentSection blogId={blogid} />
+      <CommentSection blog={blogData} />
     </div>
   );
 };
