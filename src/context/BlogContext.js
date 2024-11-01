@@ -13,6 +13,7 @@ const BlogContextProvider = ({ children }) => {
   const [myBlogs, setMyBlogs] = useState([]);
   const [user, setUser] = useState(null);
   const [active, setActive] = useState("Home");
+  const [fetchCommentsAgain, setFetchCommentsAgain] = useState(false);
   const [openNav, setOpenNav] = useState(false);
 
   return (
@@ -32,6 +33,8 @@ const BlogContextProvider = ({ children }) => {
         setFetchagain,
         openNav,
         setOpenNav,
+        fetchCommentsAgain,
+        setFetchCommentsAgain,
       }}
     >
       {children}
