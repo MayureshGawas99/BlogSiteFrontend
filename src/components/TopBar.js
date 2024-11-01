@@ -12,8 +12,8 @@ import logo from "../assets/blogger.png";
 import { BlogContext } from "../context/BlogContext";
 
 export default function TopBar() {
-  const [openNav, setOpenNav] = useState(false);
-  const { isLogin, setIsLogin, active, setActive } = useContext(BlogContext);
+  const { isLogin, setIsLogin, active, setActive, openNav, setOpenNav } =
+    useContext(BlogContext);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -40,7 +40,10 @@ export default function TopBar() {
       >
         <Link
           to="/"
-          onClick={() => setActive("Home")}
+          onClick={() => {
+            setOpenNav(false);
+            setActive("Home");
+          }}
           className="flex items-center"
         >
           <p className={` ${active === "Home" && "border-b-2 border-black"}`}>
@@ -56,7 +59,10 @@ export default function TopBar() {
       >
         <Link
           to="/about"
-          onClick={() => setActive("About")}
+          onClick={() => {
+            setOpenNav(false);
+            setActive("About");
+          }}
           className="flex items-center"
         >
           <p className={` ${active === "About" && "border-b-2 border-black"}`}>
@@ -162,6 +168,7 @@ export default function TopBar() {
                 size="sm"
                 className="border-2 border-indigo-400 rounded-lg"
                 onClick={() => {
+                  setOpenNav(false);
                   navigate("/login");
                 }}
               >
@@ -174,6 +181,7 @@ export default function TopBar() {
                 size="sm"
                 className=""
                 onClick={() => {
+                  setOpenNav(false);
                   navigate("/signup");
                 }}
               >
