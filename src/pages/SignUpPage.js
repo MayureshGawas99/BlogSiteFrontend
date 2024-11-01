@@ -39,12 +39,6 @@ const SignUpPage = () => {
   };
   return (
     <div className="flex items-center justify-center h-full px-0 login-bg md:justify-start lg:px-20 md:px-16">
-      {/* <div className="mb-12 md:mb-0 md:w-6/12 md:p-5 lg:w-6/12">
-        <img
-          src="https://tecdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.svg"
-          alt="Phone image"
-        />
-      </div> */}
       <div className="w-10/12 md:w-8/12 lg:px-10 lg:w-5/12 glassmorphism ">
         <form>
           <div className="mb-5 text-lg font-bold md:text-3xl">
@@ -56,6 +50,10 @@ const SignUpPage = () => {
               label="Name"
               type="text"
               required
+              className="text-black placeholder-shown:border-black placeholder-shown:border-t-black"
+              labelProps={{
+                className: "peer-placeholder-shown:text-black", // Style the label for dark theme
+              }}
               onChange={(e) => {
                 setName(e.target.value);
               }}
@@ -67,6 +65,10 @@ const SignUpPage = () => {
               label="Email"
               type="email"
               required
+              className="text-black placeholder-shown:border-black placeholder-shown:border-t-black"
+              labelProps={{
+                className: "peer-placeholder-shown:text-black", // Style the label for dark theme
+              }}
               onChange={(e) => {
                 setEmail(e.target.value);
               }}
@@ -78,6 +80,10 @@ const SignUpPage = () => {
               label="Password"
               type="password"
               required
+              className="text-black placeholder-shown:border-black placeholder-shown:border-t-black "
+              labelProps={{
+                className: "peer-placeholder-shown:text-black", // Style the label for dark theme
+              }}
               onChange={(e) => {
                 setPassword(e.target.value);
               }}

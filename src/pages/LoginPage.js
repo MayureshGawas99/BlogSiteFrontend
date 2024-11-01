@@ -46,7 +46,7 @@ const LoginPage = () => {
     }
   };
   return (
-    <div className="flex items-center justify-center h-full px-0 login-bg md:justify-start lg:px-20 md:px-16">
+    <div className="flex items-center justify-center h-full px-0 login-bg md:justify-end lg:px-20 md:px-16">
       {/* <div className="mb-12 md:mb-0 md:w-6/12 md:p-5 lg:w-6/12">
         <img
           src="https://tecdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.svg"
@@ -64,6 +64,10 @@ const LoginPage = () => {
               label="Email"
               type="email"
               required
+              className="text-black placeholder-shown:border-black placeholder-shown:border-t-black"
+              labelProps={{
+                className: "peer-placeholder-shown:text-black", // Style the label for dark theme
+              }}
               onChange={(e) => {
                 setEmail(e.target.value);
               }}
@@ -75,6 +79,10 @@ const LoginPage = () => {
               label="Password"
               type="password"
               required
+              className="text-black placeholder-shown:border-black placeholder-shown:border-t-black"
+              labelProps={{
+                className: "peer-placeholder-shown:text-black", // Style the label for dark theme
+              }}
               onChange={(e) => {
                 setPassword(e.target.value);
               }}
