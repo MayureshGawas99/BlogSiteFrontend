@@ -18,11 +18,17 @@ function CommentCard({ comment, replyDepth, blogId }) {
   const [replyOpen, setReplyOpen] = useState(false);
   const [reply, setReply] = useState("");
   const [commentLike, setCommentLike] = useState(false);
+  const [commentLikeCount, setCommentLikeCount] = useState(0);
   const [loading, setLoading] = useState(false);
   const [openReplyBox, setOpenReplyBox] = useState(false);
-  const { user, fetchCommentsAgain, setFetchCommentsAgain } =
-    useContext(BlogContext);
-  const [state, setState] = React.useState("reply");
+  const {
+    user,
+    fetchCommentsAgain,
+    setFetchCommentsAgain,
+    commentCount,
+    setCommentCount,
+  } = useContext(BlogContext);
+  const [state, setState] = useState("reply");
   const [replies, setReplies] = useState([]);
 
   const editOrReplyComment = async () => {
@@ -34,7 +40,6 @@ function CommentCard({ comment, replyDepth, blogId }) {
       }
       setReply("");
       setOpenReplyBox(false);
-      setFetchCommentsAgain(!fetchCommentsAgain);
     } catch (error) {
       console.log(error);
     }
@@ -57,7 +62,12 @@ function CommentCard({ comment, replyDepth, blogId }) {
         }
       );
       enqueueSnackbar(data.message, { variant: "success" });
-      setFetchCommentsAgain(!fetchCommentsAgain);
+      if (commentLike) {
+        setCommentLikeCount(commentLikeCount - 1);
+      } else {
+        setCommentLikeCount(commentLikeCount + 1);
+      }
+      setCommentLike(!commentLike);
     } catch (error) {
       console.log(error);
     }
@@ -104,7 +114,9 @@ function CommentCard({ comment, replyDepth, blogId }) {
         },
       });
       setReply("");
+      setCommentCount(commentCount + 1);
       setFetchCommentsAgain(!fetchCommentsAgain);
+
       if (data) {
         enqueueSnackbar("Comment created successfully", { variant: "success" });
       }
@@ -131,9 +143,6 @@ function CommentCard({ comment, replyDepth, blogId }) {
           "auth-token": localStorage.getItem("auth-token"),
         },
       });
-
-      setReply("");
-      setOpenReplyBox(false);
       setFetchCommentsAgain(!fetchCommentsAgain);
     } catch (error) {
       console.log(error);
@@ -145,6 +154,7 @@ function CommentCard({ comment, replyDepth, blogId }) {
       const { data } = await commonAxios.get(
         `/api/v1/comment/get-replies/${comment?._id}`
       );
+      console.log(data, "comment");
       setReplies(data);
     } catch (error) {
       console.log(error);
@@ -156,8 +166,9 @@ function CommentCard({ comment, replyDepth, blogId }) {
     if (comment) {
       fetchCommentsReplies();
       setCommentLike(comment?.isLiked);
+      setCommentLikeCount(comment?.likeCount);
     }
-  }, [fetchCommentsAgain]);
+  }, []);
   return (
     <div className={` flex flex-col ou overflow-x-auto my-2`}>
       <div className={`flex flex-row items-center`}>
@@ -207,7 +218,7 @@ function CommentCard({ comment, replyDepth, blogId }) {
                       onClick={likeComment}
                     />
                   )}
-                  <div className="pl-2 text-base">{comment?.likeCount}</div>
+                  <div className="pl-2 text-base">{commentLikeCount}</div>
                 </div>
                 <div
                   className="pl-5 text-sm cursor-pointer"

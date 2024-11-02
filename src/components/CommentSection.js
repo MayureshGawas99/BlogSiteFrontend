@@ -24,8 +24,13 @@ function CommentSection({ blog }) {
   const [totalPages, setTotalPages] = useState(0);
 
   const [currentPage, setCurrentPage] = useState(1);
-  const { user, fetchCommentsAgain, setFetchCommentsAgain } =
-    useContext(BlogContext);
+  const {
+    user,
+    fetchCommentsAgain,
+    setFetchCommentsAgain,
+    commentCount,
+    setCommentCount,
+  } = useContext(BlogContext);
 
   const addComment = async (parent = null) => {
     try {
@@ -42,6 +47,7 @@ function CommentSection({ blog }) {
       });
       setComment("");
       setFetchCommentsAgain(!fetchCommentsAgain);
+      setCommentCount(commentCount + 1);
       if (data) {
         enqueueSnackbar("Comment created successfully", { variant: "success" });
       }

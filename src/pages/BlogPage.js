@@ -19,7 +19,14 @@ const BlogPage = () => {
   const { blogid } = useParams();
   const [loading, setLoading] = useState(false);
   const [isBlogLiked, setIsBlogLiked] = useState(false);
-  const { fetchCommentsAgain, setFetchCommentsAgain } = useContext(BlogContext);
+  const [likeCount, setLikeCount] = useState(0);
+  const {
+    fetchCommentsAgain,
+    setFetchCommentsAgain,
+    user,
+    commentCount,
+    setCommentCount,
+  } = useContext(BlogContext);
   const getDate = (date) => {
     const inputDate = new Date(date);
     const options = { month: "long", day: "numeric", year: "numeric" };
@@ -29,14 +36,25 @@ const BlogPage = () => {
 
   const likeBlog = async () => {
     try {
+      if (!user) {
+        enqueueSnackbar("Please login to like the blog", {
+          variant: "warning",
+        });
+        return;
+      }
+
       const { data } = await commonAxios.get(`/api/v1/blog/like/${blogid}`, {
         headers: {
           "auth-token": localStorage.getItem("auth-token"),
         },
       });
+      if (!isBlogLiked) {
+        setLikeCount(likeCount + 1);
+      } else {
+        setLikeCount(likeCount - 1);
+      }
       enqueueSnackbar(data.message, { variant: "success" });
       setIsBlogLiked(!isBlogLiked);
-      setFetchCommentsAgain(!fetchCommentsAgain);
     } catch (error) {
       console.log(error);
     }
@@ -54,8 +72,11 @@ const BlogPage = () => {
             },
           }
         );
-        setBlogData(data.blogs);
-        setIsBlogLiked(data.isBlogLiked);
+        setBlogData(data?.blogs);
+        setIsBlogLiked(data?.isBlogLiked);
+        setLikeCount(data?.blogs?.likeCount);
+        setCommentCount(data?.blogs?.totalCommentCount);
+
         console.log(data.blogs);
       } catch (error) {
         console.log(error);
@@ -64,7 +85,7 @@ const BlogPage = () => {
       }
     };
     getBlogDetails(blogid);
-  }, [fetchCommentsAgain]);
+  }, []);
 
   return (
     <div className="flex flex-col items-center h-full bg-gray-100">
@@ -115,12 +136,11 @@ const BlogPage = () => {
                 ) : (
                   <FaRegHeart onClick={likeBlog} />
                 )}{" "}
-                <span>{blogData?.likeCount}</span>
+                <span>{likeCount}</span>
               </div>
 
               <div className="flex flex-row items-center gap-1">
-                <LiaCommentSolid size={20} />{" "}
-                <span>{blogData?.totalCommentCount}</span>
+                <LiaCommentSolid size={20} /> <span>{commentCount}</span>
               </div>
             </div>
           </div>

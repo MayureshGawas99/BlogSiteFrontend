@@ -15,6 +15,7 @@ const BlogContextProvider = ({ children }) => {
   const [active, setActive] = useState("Home");
   const [fetchCommentsAgain, setFetchCommentsAgain] = useState(false);
   const [openNav, setOpenNav] = useState(false);
+  const [commentCount, setCommentCount] = useState(0);
 
   return (
     <BlogContext.Provider
@@ -35,6 +36,8 @@ const BlogContextProvider = ({ children }) => {
         setOpenNav,
         fetchCommentsAgain,
         setFetchCommentsAgain,
+        commentCount,
+        setCommentCount,
       }}
     >
       {children}
