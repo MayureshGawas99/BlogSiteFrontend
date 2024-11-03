@@ -114,7 +114,7 @@ const UpdateForm = ({ setUpdate }) => {
       <div className="flex justify-center">
         <button
           onClick={handleUpdate}
-          className="bg-indigo-900 w-[10rem] hover:bg-indigo-600 text-white py-2 px-4 rounded"
+          className="align-middle select-none font-sans font-bold text-center uppercase transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none text-xs py-3 px-6 rounded-lg bg-gradient-to-tr from-indigo-600 to-indigo-400 text-white shadow-md shadow-indigo-500/20 hover:shadow-lg hover:shadow-indigo-500/40 active:opacity-[0.85] block w-full"
         >
           Update Profile
         </button>

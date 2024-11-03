@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import commonAxios from "../components/AxiosInstance";
 import {
   Avatar,
@@ -20,6 +20,7 @@ const BlogPage = () => {
   const [loading, setLoading] = useState(false);
   const [isBlogLiked, setIsBlogLiked] = useState(false);
   const [likeCount, setLikeCount] = useState(0);
+  const navigate = useNavigate();
   const {
     fetchCommentsAgain,
     setFetchCommentsAgain,
@@ -79,6 +80,13 @@ const BlogPage = () => {
 
         console.log(data.blogs);
       } catch (error) {
+        setTimeout(() => {
+          enqueueSnackbar("Private Blog or Blog not found", {
+            variant: "error",
+          });
+          navigate("/");
+        }, 500);
+
         console.log(error);
       } finally {
         setLoading(false);
@@ -132,9 +140,12 @@ const BlogPage = () => {
             <div className="flex flex-row gap-5">
               <div className="flex flex-row items-center gap-1">
                 {isBlogLiked ? (
-                  <FaHeart className="text-red-500" onClick={likeBlog} />
+                  <FaHeart
+                    className="text-red-500 cursor-pointer"
+                    onClick={likeBlog}
+                  />
                 ) : (
-                  <FaRegHeart onClick={likeBlog} />
+                  <FaRegHeart onClick={likeBlog} className="cursor-pointer" />
                 )}{" "}
                 <span>{likeCount}</span>
               </div>

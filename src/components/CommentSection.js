@@ -57,6 +57,11 @@ function CommentSection({ blog }) {
     }
   };
 
+  const handleSubmit = async (event) => {
+    event.preventDefault(); // Prevent page reload
+    await addComment(); // Call the addComment function
+  };
+
   const fetchComments = async () => {
     try {
       setLoading(true);
@@ -89,26 +94,28 @@ function CommentSection({ blog }) {
       <h2 className="mb-4 text-3xl font-bold sm:text-3xl md:text-4xl lg:text-5xl">
         Comments
       </h2>
-      <div className="flex gap-2 mb-4">
-        <div className="flex-grow">
-          <input
-            type="text"
-            className="w-full h-full px-2 py-2 rounded-lg focus:outline-none bg-white/15 backdrop-blur-md"
-            placeholder="Add a comment"
-            value={comment}
-            onChange={(e) => setComment(e.target.value)}
-          />
+      <form onSubmit={handleSubmit}>
+        <div className="flex gap-2 mb-4">
+          <div className="flex-grow">
+            <input
+              type="text"
+              className="w-full h-full px-2 py-2 rounded-lg focus:outline-none bg-white/15 backdrop-blur-md"
+              placeholder="Add a comment"
+              value={comment}
+              onChange={(e) => setComment(e.target.value)}
+            />
+          </div>
+          <Button
+            variant="gradient"
+            type="submit"
+            size="sm"
+            color="indigo"
+            className="rounded-lg "
+          >
+            <span>Send</span>
+          </Button>
         </div>
-        <Button
-          variant="gradient"
-          size="sm"
-          color="indigo"
-          className="rounded-lg "
-          onClick={(e) => addComment(null)}
-        >
-          <span>Send</span>
-        </Button>
-      </div>
+      </form>
       {loading ? (
         <div className="flex justify-center w-full py-6">
           <Spinner />

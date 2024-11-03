@@ -152,9 +152,13 @@ function CommentCard({ comment, replyDepth, blogId }) {
     try {
       setLoading(true);
       const { data } = await commonAxios.get(
-        `/api/v1/comment/get-replies/${comment?._id}`
+        `/api/v1/comment/get-replies/${comment?._id}`,
+        {
+          headers: {
+            "auth-token": localStorage.getItem("auth-token"),
+          },
+        }
       );
-      console.log(data, "comment");
       setReplies(data);
     } catch (error) {
       console.log(error);
@@ -162,6 +166,12 @@ function CommentCard({ comment, replyDepth, blogId }) {
       setLoading(false);
     }
   };
+
+  const handleSubmit = async (event) => {
+    event.preventDefault(); // Prevent page reload
+    await editOrReplyComment(comment._id);
+  };
+
   useEffect(() => {
     if (comment) {
       fetchCommentsReplies();
@@ -274,32 +284,35 @@ function CommentCard({ comment, replyDepth, blogId }) {
               </div>
             </div>
           </div>
-
-          <div
-            className={`flex flex-row overflow-y-hidden gap-2 h-0 ${
-              openReplyBox && "h-auto"
-            } transition-all duration-500`}
-          >
-            <input
-              placeholder={"Reply..."}
-              className={`w-full  ${
-                openReplyBox && "p-2"
-              } rounded-md  focus:outline-none bg-white/15 backdrop-blur-sm`}
-              value={reply}
-              onChange={(e) => setReply(e.target.value)}
-            ></input>
-            <div className="flex justify-start">
-              <Button
-                variant="gradient"
-                size="sm"
-                color="indigo"
-                className="rounded-lg "
-                onClick={(e) => editOrReplyComment(comment._id)}
-              >
-                {state === "reply" ? "Reply" : "Edit"}
-              </Button>
+          <form onSubmit={handleSubmit}>
+            <div
+              className={`flex flex-row overflow-y-hidden gap-2 h-0 ${
+                openReplyBox && "h-auto"
+              } transition-all duration-500`}
+            >
+              <input
+                placeholder={"Reply..."}
+                className={`w-full  ${
+                  openReplyBox && "p-2"
+                } rounded-md  focus:outline-none bg-white/15 backdrop-blur-sm`}
+                value={reply}
+                onChange={(e) => setReply(e.target.value)}
+              ></input>
+              <div className="flex justify-start">
+                <Button
+                  variant="gradient"
+                  size="sm"
+                  color="indigo"
+                  className="rounded-lg "
+                  type="submit"
+                  // onClick={(e) => editOrReplyComment(comment._id)}
+                >
+                  {state === "reply" ? "Reply" : "Edit"}
+                </Button>
+              </div>
             </div>
-          </div>
+          </form>
+
           {/* )} */}
         </div>
         {comment?.replies.length > 0 && (
