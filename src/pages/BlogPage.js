@@ -138,21 +138,24 @@ const BlogPage = () => {
             <hr class="h-[2px] my-5 bg-gray-200 border-0 dark:bg-gray-700"></hr>
 
             <div className="flex flex-row gap-5">
-              <div className="flex flex-row items-center gap-1">
-                {isBlogLiked ? (
-                  <FaHeart
-                    className="text-red-500 cursor-pointer"
-                    onClick={likeBlog}
-                  />
-                ) : (
-                  <FaRegHeart onClick={likeBlog} className="cursor-pointer" />
-                )}{" "}
-                <span>{likeCount}</span>
-              </div>
-
-              <div className="flex flex-row items-center gap-1">
-                <LiaCommentSolid size={20} /> <span>{commentCount}</span>
-              </div>
+              <Tooltip content="Likes" placement="top">
+                <div className="flex flex-row items-center gap-1">
+                  {isBlogLiked ? (
+                    <FaHeart
+                      className="text-red-500 cursor-pointer"
+                      onClick={likeBlog}
+                    />
+                  ) : (
+                    <FaRegHeart onClick={likeBlog} className="cursor-pointer" />
+                  )}{" "}
+                  <span>{likeCount}</span>
+                </div>
+              </Tooltip>
+              <Tooltip content="Comments" placement="top">
+                <div className="flex flex-row items-center gap-1">
+                  <LiaCommentSolid size={20} /> <span>{commentCount}</span>
+                </div>
+              </Tooltip>
             </div>
           </div>
         )}

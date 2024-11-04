@@ -50,10 +50,7 @@ const SignUpPage = () => {
               label="Name"
               type="text"
               required
-              className="text-black !border-black focus:border-t-0  "
-              labelProps={{
-                className: "!text-black z-20 ", // Style the label for dark theme
-              }}
+              color="black"
               onChange={(e) => {
                 setName(e.target.value);
               }}
@@ -65,10 +62,7 @@ const SignUpPage = () => {
               label="Email"
               type="email"
               required
-              className="text-black !border-black focus:border-t-0"
-              labelProps={{
-                className: "!text-black", // Style the label for dark theme
-              }}
+              color="black"
               onChange={(e) => {
                 setEmail(e.target.value);
               }}
@@ -80,10 +74,7 @@ const SignUpPage = () => {
               label="Password"
               type="password"
               required
-              className="text-black !border-black focus:border-t-0 "
-              labelProps={{
-                className: "!text-black", // Style the label for dark theme
-              }}
+              color="black"
               onChange={(e) => {
                 setPassword(e.target.value);
               }}
@@ -98,19 +89,6 @@ const SignUpPage = () => {
           >
             SIGN UP
           </button>
-          {/* <div className="my-4 flex items-center before:mt-0.5 before:flex-1 before:border-t before:border-neutral-300 after:mt-0.5 after:flex-1 after:border-t after:border-neutral-300">
-            <p className="mx-4 mb-0 font-semibold text-center dark:text-neutral-200">
-              OR
-            </p>
-          </div>
-
-          <button
-            class="inline-block w-full  middle none center mr-4 rounded-lg bg-indigo-900 py-4 px-6 font-sans text-xs font-bold uppercase text-white shadow-md shadow-blue-500/20 transition-all hover:shadow-lg hover:shadow-blue-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
-            data-ripple-light="true"
-            onClick={() => navigate("/login")}
-          >
-            Login
-          </button> */}
         </form>
       </div>
     </div>

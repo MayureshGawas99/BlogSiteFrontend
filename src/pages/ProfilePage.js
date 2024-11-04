@@ -8,6 +8,7 @@ import { FaFilter, FaPlus, FaSortAmountDownAlt } from "react-icons/fa";
 import Spinner from "../components/Spinner";
 import { Button } from "@material-tailwind/react";
 import { set } from "date-fns";
+import { MdOpenInNew } from "react-icons/md";
 
 const ProfilePage = () => {
   const { user, myBlogs, setMyBlogs, fetchagain } = useContext(BlogContext);
@@ -28,6 +29,12 @@ const ProfilePage = () => {
   const handleSortChange = (event) => {
     setSelectedSort(event.target.value);
     setCurrentPage(1);
+  };
+
+  const handlePageChange = (event) => {
+    const newPage = parseInt(event.target.value);
+    setCurrentPage(newPage);
+    console.log("Selected Page:", newPage); // You can also trigger a function here to fetch data for the selected page
   };
 
   const navigate = useNavigate();
@@ -54,6 +61,7 @@ const ProfilePage = () => {
             },
           }
         );
+        console.log(data.blogs);
         setMyBlogs(data.blogs);
         setTotalPages(data.totalPages);
         setPublicBlogs(data.publicBlogsCount);
@@ -195,6 +203,26 @@ const ProfilePage = () => {
                   </label>
                 </div>
               </div>
+              {totalPages > 1 && (
+                <>
+                  <hr class="h-[2px] my-5 bg-gray-200 border-0 dark:bg-gray-700"></hr>
+                  <div className="flex items-center gap-2 text-lg font-bold">
+                    <MdOpenInNew size={22} />
+                    <span>Select Page:</span>
+                  </div>
+
+                  <select
+                    id="pages"
+                    value={currentPage}
+                    onChange={handlePageChange}
+                    className="mt-2 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                  >
+                    {Array.from({ length: totalPages }, (_, index) => (
+                      <option value={index + 1}>{index + 1}</option>
+                    ))}
+                  </select>
+                </>
+              )}
             </div>
           </div>
           <div className="lg:col-span-8">
@@ -220,24 +248,6 @@ const ProfilePage = () => {
                       <ProfileBlogCard key={blog.id} blog={blog} />
                     ))}
                   </div>
-                  {totalPages > 1 && (
-                    <div className="flex items-center justify-center gap-5 mt-5">
-                      <button
-                        onClick={() => setCurrentPage(currentPage - 1)}
-                        disabled={currentPage === 1}
-                        className="align-middle select-none font-sans font-bold text-center uppercase transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none text-xs py-3 px-6 rounded-lg bg-gradient-to-tr from-indigo-600 to-indigo-400 text-white shadow-md shadow-indigo-500/20 hover:shadow-lg hover:shadow-indigo-500/40 active:opacity-[0.85] block w-[8rem]"
-                      >
-                        Previous
-                      </button>
-                      <button
-                        onClick={() => setCurrentPage(currentPage + 1)}
-                        disabled={currentPage === totalPages}
-                        className="align-middle select-none font-sans font-bold text-center uppercase transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none text-xs py-3 px-6 rounded-lg bg-gradient-to-tr from-indigo-600 to-indigo-400 text-white shadow-md shadow-indigo-500/20 hover:shadow-lg hover:shadow-indigo-500/40 active:opacity-[0.85] block w-[8rem]"
-                      >
-                        Next
-                      </button>{" "}
-                    </div>
-                  )}
                 </>
               )}
             </div>
