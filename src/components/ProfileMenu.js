@@ -14,23 +14,7 @@ import commonAxios from "./AxiosInstance";
 
 export function ProfileMenu() {
   const navigate = useNavigate();
-  const { setIsLogin, user, setUser, setActive } = useContext(BlogContext);
-  useEffect(() => {
-    const getUserInfo = async () => {
-      try {
-        const { data } = await commonAxios.get("/api/v1/auth/getuser", {
-          headers: {
-            "auth-token": localStorage.getItem("auth-token"),
-          },
-        }); // Replace with your actual API endpoint
-        // console.log(data);
-        setUser(data);
-      } catch (error) {
-        console.error("Error fetching blogs:", error.message);
-      }
-    };
-    getUserInfo();
-  }, []);
+  const { user, setUser, setActive } = useContext(BlogContext);
 
   return (
     <Menu placement="bottom-end">
@@ -44,7 +28,7 @@ export function ProfileMenu() {
       </MenuHandler>
       <MenuList>
         <MenuItem
-          className="flex items-center  gap-2"
+          className="flex items-center gap-2"
           onClick={() => {
             setActive("Profile");
             navigate("/profile");
@@ -75,8 +59,7 @@ export function ProfileMenu() {
           className="flex items-center gap-2 "
           onClick={() => {
             localStorage.removeItem("auth-token");
-            localStorage.removeItem("userid");
-            setIsLogin(false);
+            setUser(null);
             navigate("/login");
             setTimeout(() => {
               enqueueSnackbar("Logged out Successfully", {

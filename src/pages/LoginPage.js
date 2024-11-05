@@ -10,7 +10,7 @@ const LoginPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
-  const { setIsLogin } = useContext(BlogContext);
+  const { setJwt } = useContext(BlogContext);
 
   useEffect(() => {
     if (localStorage.getItem("auth-token")) {
@@ -26,8 +26,7 @@ const LoginPage = () => {
         password,
       });
       localStorage.setItem("auth-token", data.authToken);
-      localStorage.setItem("userid", data.user._id);
-      setIsLogin(true);
+      setJwt(data.authToken);
       navigate("/");
       setTimeout(() => {
         enqueueSnackbar("Log in Successfull", {

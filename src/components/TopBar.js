@@ -10,18 +10,29 @@ import { Link, useNavigate } from "react-router-dom";
 import { ProfileMenu } from "./ProfileMenu";
 import logo from "../assets/blogger.png";
 import { BlogContext } from "../context/BlogContext";
+import commonAxios from "./AxiosInstance";
 
 export default function TopBar() {
-  const { isLogin, setIsLogin, active, setActive, openNav, setOpenNav } =
+  const { active, setActive, user, setUser, openNav, setOpenNav, jwt, setJwt } =
     useContext(BlogContext);
   const navigate = useNavigate();
-
   useEffect(() => {
-    let token = localStorage.getItem("auth-token");
-    if (token) {
-      setIsLogin(true);
-    }
-  }, []);
+    const getUserInfo = async () => {
+      try {
+        const { data } = await commonAxios.get("/api/v1/auth/getuser", {
+          headers: {
+            "auth-token": localStorage.getItem("auth-token"),
+          },
+        }); // Replace with your actual API endpoint
+        // console.log(data);
+        setUser(data);
+      } catch (error) {
+        console.error("Error fetching blogs:", error.message);
+        localStorage.removeItem("auth-token");
+      }
+    };
+    getUserInfo();
+  }, [jwt]);
 
   React.useEffect(() => {
     window.addEventListener(
@@ -158,7 +169,7 @@ export default function TopBar() {
             <div className="hidden mr-4 lg:block">{navList}</div>
             <div className="flex items-center gap-4">
               <div className="flex items-center gap-x-2">
-                {isLogin ? (
+                {user ? (
                   <ProfileMenu />
                 ) : (
                   <>
@@ -229,7 +240,7 @@ export default function TopBar() {
         </div>
         <MobileNav open={openNav}>
           {navList}
-          {!isLogin && (
+          {!user && (
             <div className="flex items-center mb-2 gap-x-2 md:mb-0">
               <Button
                 fullWidth

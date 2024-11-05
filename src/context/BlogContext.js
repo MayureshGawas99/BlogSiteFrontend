@@ -7,7 +7,6 @@ const BlogContext = createContext();
 
 // Create a provider component to wrap your app
 const BlogContextProvider = ({ children }) => {
-  const [isLogin, setIsLogin] = useState(false);
   const [fetchagain, setFetchagain] = useState(false);
   const [blogs, setBlogs] = useState([]);
   const [myBlogs, setMyBlogs] = useState([]);
@@ -15,13 +14,12 @@ const BlogContextProvider = ({ children }) => {
   const [active, setActive] = useState("Home");
   const [fetchCommentsAgain, setFetchCommentsAgain] = useState(false);
   const [openNav, setOpenNav] = useState(false);
+  const [jwt, setJwt] = useState("");
   const [commentCount, setCommentCount] = useState(0);
 
   return (
     <BlogContext.Provider
       value={{
-        isLogin,
-        setIsLogin,
         blogs,
         setBlogs,
         user,
@@ -38,6 +36,8 @@ const BlogContextProvider = ({ children }) => {
         setFetchCommentsAgain,
         commentCount,
         setCommentCount,
+        jwt,
+        setJwt,
       }}
     >
       {children}
