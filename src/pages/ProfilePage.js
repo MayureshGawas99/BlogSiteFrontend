@@ -9,6 +9,7 @@ import Spinner from "../components/Spinner";
 import { Button } from "@material-tailwind/react";
 import { set } from "date-fns";
 import { MdOpenInNew } from "react-icons/md";
+import BlogCard from "../components/BlogCard";
 
 const ProfilePage = () => {
   const { user, myBlogs, setMyBlogs, fetchagain } = useContext(BlogContext);
@@ -16,8 +17,11 @@ const ProfilePage = () => {
   const [loading, setLoading] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
+  const [currentLikePage, setCurrentLikePage] = useState(1);
+  const [totalLikePages, setTotalLikePages] = useState(1);
   const [publicBlogs, setPublicBlogs] = useState(0);
   const [privateBlogs, setPrivateBlogs] = useState(0);
+  const [likedBlogs, setLikedBlogs] = useState([]);
   const [selectedFilter, setSelectedFilter] = useState("public"); // initial state
 
   const handleFilterChange = (event) => {
@@ -36,18 +40,38 @@ const ProfilePage = () => {
     setCurrentPage(newPage);
     console.log("Selected Page:", newPage); // You can also trigger a function here to fetch data for the selected page
   };
+  const handleLikePageChange = (event) => {
+    const newPage = parseInt(event.target.value);
+    setCurrentLikePage(newPage);
+    console.log("Selected Page:", newPage); // You can also trigger a function here to fetch data for the selected page
+  };
 
   const navigate = useNavigate();
   useEffect(() => {
-    if (!localStorage.getItem("auth-token")) {
+    if (!user) {
       navigate("/login");
     }
   }, []);
 
-  // useEffect(() => {
-  //   console.log(selectedFilter, "selectedFilter");
-  //   console.log(selectedSort, "selectedSort");
-  // }, [selectedFilter, selectedSort]);
+  useEffect(() => {
+    const fetchLikedBlogs = async () => {
+      try {
+        const { data } = await commonAxios.get(
+          `/api/v1/blog/userlikedblogs?page=${currentLikePage}`,
+          {
+            headers: {
+              "auth-token": localStorage.getItem("auth-token"),
+            },
+          }
+        );
+        setLikedBlogs(data.likedBlogs);
+        setTotalLikePages(data.totalPages);
+      } catch (error) {
+        console.error("Error fetching liked blogs:", error.message);
+      }
+    };
+    fetchLikedBlogs();
+  }, [currentLikePage]);
 
   useEffect(() => {
     const getUserBlogs = async () => {
@@ -250,6 +274,33 @@ const ProfilePage = () => {
                   </div>
                 </>
               )}
+            </div>
+            <div className="p-6 mt-5 bg-white rounded-lg shadow">
+              <div className="flex items-center justify-between mb-4">
+                <h2 className="mb-0 text-xl font-bold">My Liked Blogs</h2>
+                {totalLikePages > 1 && (
+                  <div className="flex flex-row items-center gap-2 text-sm md:text-base">
+                    <div className="whitespace-nowrap">Select Page:</div>
+
+                    <select
+                      id="pages"
+                      value={currentLikePage}
+                      onChange={handleLikePageChange}
+                      className=" bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    >
+                      {Array.from({ length: totalLikePages }, (_, index) => (
+                        <option value={index + 1}>{index + 1}</option>
+                      ))}
+                    </select>
+                  </div>
+                )}
+              </div>
+
+              <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8 mt-5 justify-items-center">
+                {likedBlogs?.map((blog) => (
+                  <BlogCard key={blog.id} blog={blog} />
+                ))}
+              </div>
             </div>
           </div>
         </div>
