@@ -7,7 +7,7 @@ import {
   Tooltip,
   Typography,
 } from "@material-tailwind/react";
-import { FaHeart, FaRegComments, FaRegHeart } from "react-icons/fa";
+import { FaHeart, FaRegHeart } from "react-icons/fa";
 import { LiaCommentSolid } from "react-icons/lia";
 import Spinner from "../components/Spinner";
 import CommentSection from "../components/CommentSection";
@@ -21,13 +21,7 @@ const BlogPage = () => {
   const [isBlogLiked, setIsBlogLiked] = useState(false);
   const [likeCount, setLikeCount] = useState(0);
   const navigate = useNavigate();
-  const {
-    fetchCommentsAgain,
-    setFetchCommentsAgain,
-    user,
-    commentCount,
-    setCommentCount,
-  } = useContext(BlogContext);
+  const { user, commentCount, setCommentCount } = useContext(BlogContext);
   const getDate = (date) => {
     const inputDate = new Date(date);
     const options = { month: "long", day: "numeric", year: "numeric" };
@@ -93,7 +87,7 @@ const BlogPage = () => {
       }
     };
     getBlogDetails(blogid);
-  }, []);
+  }, [blogid, navigate, setCommentCount]);
 
   return (
     <div className="flex flex-col items-center h-full bg-gray-100">
@@ -102,7 +96,10 @@ const BlogPage = () => {
           <Spinner />
         ) : (
           <div>
-            <CardFooter className="flex flex-row items-center gap-2 p-0 cursor-pointer">
+            <CardFooter
+              className="flex flex-row items-center gap-2 p-0 cursor-pointer"
+              onClick={() => navigate(`/user/${blogData?.user._id}`)}
+            >
               <Avatar
                 size="md"
                 variant="circular"

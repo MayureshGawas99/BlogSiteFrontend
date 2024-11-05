@@ -1,7 +1,6 @@
 import React from "react";
 import {
   Card,
-  CardHeader,
   CardBody,
   CardFooter,
   Typography,
@@ -27,7 +26,7 @@ const BlogCard = ({ blog }) => {
                 variant="circular"
                 alt="natali craig"
                 src={blog?.user.pic}
-                onClick={() => navigate(`/profile/${blog?.user._id}`)}
+                onClick={() => navigate(`/user/${blog?.user._id}`)}
                 className="border-2 border-white hover:z-10"
               />
             </Tooltip>

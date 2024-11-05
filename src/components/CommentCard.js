@@ -1,12 +1,8 @@
 import React, { useContext, useEffect, useState } from "react";
-import { BiLike, BiSolidLike } from "react-icons/bi";
-// import { addComment, deleteComment, likeComment } from "@/server/commentServer";
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
-// import { toast } from "react-toastify";
 import { BlogContext } from "../context/BlogContext";
-import { dummyComments } from "../context/dummyComments";
 import { Avatar, Button, Tooltip } from "@material-tailwind/react";
-import { formatDistanceToNow, set } from "date-fns";
+import { formatDistanceToNow } from "date-fns";
 import commonAxios from "./AxiosInstance";
 import Spinner from "./Spinner";
 import { enqueueSnackbar } from "notistack";
@@ -14,7 +10,6 @@ import { FaHeart, FaRegHeart } from "react-icons/fa";
 import DeleteCommentModaL from "./DeleteCommentModal";
 
 function CommentCard({ comment, replyDepth, blogId }) {
-  // hi
   const [replyOpen, setReplyOpen] = useState(false);
   const [reply, setReply] = useState("");
   const [commentLike, setCommentLike] = useState(false);
@@ -143,6 +138,7 @@ function CommentCard({ comment, replyDepth, blogId }) {
           "auth-token": localStorage.getItem("auth-token"),
         },
       });
+      console.log(data);
       setFetchCommentsAgain(!fetchCommentsAgain);
     } catch (error) {
       console.log(error);

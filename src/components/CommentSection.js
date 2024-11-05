@@ -1,16 +1,9 @@
 import React, { useContext, useEffect, useState } from "react";
-// import AppContext from "@/context/AppContext";
-// import { toast } from "react-toastify";
-// import "react-toastify/dist/ReactToastify.css";
-// import "react-toastify/dist/ReactToastify.css";
-// import { addComment, getAllComments } from "@/server/commentServer";
-import { dummyComments } from "../context/dummyComments";
 import CommentCard from "./CommentCard";
 import { Button } from "@material-tailwind/react";
 import commonAxios from "./AxiosInstance";
 import { enqueueSnackbar } from "notistack";
 import { BlogContext } from "../context/BlogContext";
-import axios from "axios";
 import Spinner from "./Spinner";
 
 function CommentSection({ blog }) {

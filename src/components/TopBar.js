@@ -13,13 +13,22 @@ import { BlogContext } from "../context/BlogContext";
 import commonAxios from "./AxiosInstance";
 
 export default function TopBar() {
-  const { active, setActive, user, setUser, openNav, setOpenNav, jwt, setJwt } =
-    useContext(BlogContext);
+  const {
+    active,
+    setActive,
+    user,
+    setUser,
+    openNav,
+    setOpenNav,
+    jwt,
+    setSearchTerm,
+  } = useContext(BlogContext);
   const navigate = useNavigate();
+  const [searchInput, setSearchInput] = useState("");
   useEffect(() => {
     const getUserInfo = async () => {
       try {
-        const { data } = await commonAxios.get("/api/v1/auth/getuser", {
+        const { data } = await commonAxios.get("/api/v1/auth/getuser/user", {
           headers: {
             "auth-token": localStorage.getItem("auth-token"),
           },
@@ -32,14 +41,31 @@ export default function TopBar() {
       }
     };
     getUserInfo();
-  }, [jwt]);
+  }, [jwt, setUser]);
+
+  useEffect(() => {
+    const delayDebounceFn = setTimeout(() => {
+      if (searchInput.trim() !== "") {
+        setSearchTerm(searchInput);
+        console.log(searchInput);
+      } else {
+      }
+    }, 1000); // Waits for 1 second before navigating
+
+    return () => clearTimeout(delayDebounceFn); // Cleanup the timeout if the user types again
+  }, [searchInput, setSearchTerm]);
+
+  const handleSearch = (e) => {
+    e.preventDefault();
+    navigate(`/search`);
+  };
 
   React.useEffect(() => {
     window.addEventListener(
       "resize",
       () => window.innerWidth >= 960 && setOpenNav(false)
     );
-  }, []);
+  }, [setOpenNav]);
 
   const navList = (
     <ul className="flex flex-col gap-2 pl-0 mt-2 mb-2 lg:mb-0 lg:mt-0 lg:flex-row lg:items-center lg:gap-6">
@@ -81,7 +107,8 @@ export default function TopBar() {
           </p>
         </Link>
       </Typography>
-      {/* <form className="lg:hidden">
+
+      <form className="lg:hidden" onSubmit={handleSearch}>
         <label
           htmlFor="default-search"
           className="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white"
@@ -111,10 +138,17 @@ export default function TopBar() {
             id="default-search"
             className="block w-full p-2 text-sm text-gray-900 border border-gray-300 rounded-lg ps-10 bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
             placeholder="Search Blogs or Users..."
-            required
+            value={searchInput}
+            onChange={(e) => setSearchInput(e.target.value)}
           />
+          <button
+            type="submit"
+            className="absolute bottom-[5px] px-3 py-1 text-sm font-medium text-white bg-blue-700 rounded-lg end-[5px] hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+          >
+            Search
+          </button>
         </div>
-      </form> */}
+      </form>
     </ul>
   );
 
@@ -126,12 +160,16 @@ export default function TopBar() {
             to="/"
             className="mr-4 cursor-pointer py-1.5 font-bold text-xl flex gap-2"
           >
-            <img src={logo} className="w-10 h-10" />
+            <img src={logo} alt="logo" className="w-10 h-10" />
             <Typography variant="h3" color="indigo" className="mb-0">
               BlogSite
             </Typography>
           </Link>
-          {/* <form className="hidden max-w-md mx-auto lg:block">
+
+          <form
+            className="hidden max-w-md mx-auto lg:block"
+            onSubmit={handleSearch}
+          >
             <label
               htmlFor="default-search"
               className="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white"
@@ -161,10 +199,18 @@ export default function TopBar() {
                 id="default-search"
                 className="block w-[20rem] p-2 text-sm text-gray-900 border border-gray-300 rounded-lg ps-10 bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                 placeholder="Search Blogs or Users..."
-                required
+                value={searchInput}
+                onChange={(e) => setSearchInput(e.target.value)}
               />
+              <button
+                type="submit"
+                className="absolute bottom-[5px] px-3 py-1 text-sm font-medium text-white bg-blue-700 rounded-lg end-[5px] hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+              >
+                Search
+              </button>
             </div>
-          </form> */}
+          </form>
+
           <div className="flex flex-row items-center gap-5">
             <div className="hidden mr-4 lg:block">{navList}</div>
             <div className="flex items-center gap-4">

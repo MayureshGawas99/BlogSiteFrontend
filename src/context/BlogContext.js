@@ -15,6 +15,7 @@ const BlogContextProvider = ({ children }) => {
   const [fetchCommentsAgain, setFetchCommentsAgain] = useState(false);
   const [openNav, setOpenNav] = useState(false);
   const [jwt, setJwt] = useState("");
+  const [searchTerm, setSearchTerm] = useState("");
   const [commentCount, setCommentCount] = useState(0);
 
   return (
@@ -38,6 +39,8 @@ const BlogContextProvider = ({ children }) => {
         setCommentCount,
         jwt,
         setJwt,
+        searchTerm,
+        setSearchTerm,
       }}
     >
       {children}

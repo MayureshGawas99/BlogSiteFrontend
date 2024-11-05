@@ -11,6 +11,8 @@ import ProfilePage from "./pages/ProfilePage";
 import BlogPage from "./pages/BlogPage";
 import CreateBlogPage from "./pages/CreateBlogPage";
 import { useEffect } from "react";
+import SearchPage from "./pages/SearchPage";
+import UserProfilePage from "./pages/UserProfilePage";
 
 function App() {
   useEffect(() => {
@@ -26,11 +28,13 @@ function App() {
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/about" element={<AboutPage />} />
+          <Route path="/search" element={<SearchPage />} />
           <Route path="/blog/:action" element={<CreateBlogPage />} />
           <Route path="/contactus" element={<ContactUsPage />} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/signup" element={<SignUpPage />} />
           <Route path="/profile" element={<ProfilePage />} />
+          <Route path="/user/:userId" element={<UserProfilePage />} />
           <Route path="/view/:blogid" element={<BlogPage />} />
           <Route path="/*" element={<PageNotFound />} />
         </Routes>
