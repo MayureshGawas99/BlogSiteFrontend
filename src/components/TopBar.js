@@ -72,7 +72,7 @@ export default function TopBar() {
       <Typography
         as="li"
         variant="small"
-        color="blue-gray"
+        color="indigo"
         className="p-1 font-normal"
       >
         <Link
@@ -91,7 +91,7 @@ export default function TopBar() {
       <Typography
         as="li"
         variant="small"
-        color="blue-gray"
+        color="indigo"
         className="p-1 font-normal"
       >
         <Link
@@ -136,14 +136,14 @@ export default function TopBar() {
           <input
             type="search"
             id="default-search"
-            className="block w-full p-2 text-sm text-gray-900 border border-gray-300 rounded-lg ps-10 bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+            className="block w-full p-2 text-sm text-gray-900 border border-gray-300 rounded-lg ps-10 bg-gray-50 focus:ring-indigo-500 focus:border-indigo-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-indigo-500 dark:focus:border-indigo-500"
             placeholder="Search Blogs or Users..."
             value={searchInput}
             onChange={(e) => setSearchInput(e.target.value)}
           />
           <button
             type="submit"
-            className="absolute bottom-[5px] px-3 py-1 text-sm font-medium text-white bg-blue-700 rounded-lg end-[5px] hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+            className="absolute bottom-[5px] px-3 py-1 text-sm font-medium text-white bg-indigo-700 rounded-lg end-[5px] hover:bg-indigo-800 focus:ring-4 focus:outline-none focus:ring-indigo-300 dark:bg-indigo-600 dark:hover:bg-indigo-700 dark:focus:ring-indigo-800"
           >
             Search
           </button>
@@ -155,7 +155,7 @@ export default function TopBar() {
   return (
     <div className="w-full ">
       <Navbar className="sticky top-0 z-10 max-w-full px-4 py-1 rounded-none h-max ">
-        <div className="flex items-center justify-between text-blue-gray-900">
+        <div className="flex items-center justify-between text-indigo-gray-900">
           <Link
             to="/"
             className="mr-4 cursor-pointer py-1.5 font-bold text-xl flex gap-2"
@@ -197,14 +197,14 @@ export default function TopBar() {
               <input
                 type="search"
                 id="default-search"
-                className="block w-[20rem] p-2 text-sm text-gray-900 border border-gray-300 rounded-lg ps-10 bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                className="block w-[20rem] p-2 text-sm text-gray-900 border border-gray-300 rounded-lg ps-10 bg-gray-50 focus:ring-indigo-500 focus:border-indigo-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-indigo-500 dark:focus:border-indigo-500"
                 placeholder="Search Blogs or Users..."
                 value={searchInput}
                 onChange={(e) => setSearchInput(e.target.value)}
               />
               <button
                 type="submit"
-                className="absolute bottom-[5px] px-3 py-1 text-sm font-medium text-white bg-blue-700 rounded-lg end-[5px] hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                className="absolute bottom-[5px] px-3 py-1 text-sm font-medium text-white bg-indigo-700 rounded-lg end-[5px] hover:bg-indigo-800 focus:ring-4 focus:outline-none focus:ring-indigo-300 dark:bg-indigo-600 dark:hover:bg-indigo-700 dark:focus:ring-indigo-800"
               >
                 Search
               </button>
