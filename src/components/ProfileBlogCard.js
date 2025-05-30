@@ -16,7 +16,7 @@ import DeleteModaL from "./DeleteModal";
 import { LiaCommentSolid } from "react-icons/lia";
 import { FaEdit, FaHeart, FaLock, FaRegHeart } from "react-icons/fa";
 const ProfileBlogCard = ({ blog }) => {
-  const { myBlogs, setMyBlogs } = useContext(BlogContext);
+  const { myBlogs, setMyBlogs, user } = useContext(BlogContext);
   const navigate = useNavigate();
 
   const handleDelete = (blogid) => {
@@ -96,27 +96,31 @@ const ProfileBlogCard = ({ blog }) => {
             </div>
           </Tooltip>
         </div>
-        <div className="flex flex-row items-center gap-2 ">
-          <Tooltip content="Edit" placement="top">
-            <span
-              className="text-indigo-500 cursor-pointer"
-              onClick={() => navigate(`/blog/edit?id=${blog?._id}`)}
-            >
-              <FaEdit size={20} />
-            </span>
-          </Tooltip>
-          <DeleteModaL blog={blog} handleDelete={handleDelete} />
-          {blog?.visibility === "private" && (
-            <Tooltip content="Private" placement="top">
+        {user && user._id === blog?.user ? (
+          <div className="flex flex-row items-center gap-2 ">
+            <Tooltip content="Edit" placement="top">
               <span
-                className="text-black cursor-pointer"
+                className="text-indigo-500 cursor-pointer"
                 onClick={() => navigate(`/blog/edit?id=${blog?._id}`)}
               >
-                <FaLock size={18} />
+                <FaEdit size={20} />
               </span>
             </Tooltip>
-          )}
-        </div>
+            <DeleteModaL blog={blog} handleDelete={handleDelete} />
+            {blog?.visibility === "private" && (
+              <Tooltip content="Private" placement="top">
+                <span
+                  className="text-black cursor-pointer"
+                  onClick={() => navigate(`/blog/edit?id=${blog?._id}`)}
+                >
+                  <FaLock size={18} />
+                </span>
+              </Tooltip>
+            )}
+          </div>
+        ) : (
+          <></>
+        )}
       </CardFooter>
     </Card>
   );

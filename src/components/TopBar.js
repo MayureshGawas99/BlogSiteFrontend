@@ -154,7 +154,7 @@ export default function TopBar() {
 
   return (
     <div className="w-full ">
-      <Navbar className="sticky top-0 z-10 max-w-full px-4 py-1 rounded-none h-max ">
+      <Navbar className="max-w-full px-4 py-1 rounded-none ">
         <div className="flex items-center justify-between text-indigo-gray-900">
           <Link
             to="/"

@@ -232,7 +232,7 @@ export default function CreateBlogPage() {
 
   return (
     <>
-      <div className="bg-gray-100 py-5">
+      <div className="py-5 bg-gray-100">
         <Card className="mx-auto w-[80%] ">
           <CardBody className="flex flex-col gap-4">
             <Typography variant="h4" color="blue-gray">
@@ -263,7 +263,7 @@ export default function CreateBlogPage() {
               Blog Content
             </Typography> */}
             <div>
-              <div className="flex flex-row justify-between items-center">
+              <div className="flex flex-row items-center justify-between">
                 {/* <p className="text-xs md:text-sm ">
                   Stuck? Need help ? Use our AI assistant
                 </p> */}
@@ -283,7 +283,7 @@ export default function CreateBlogPage() {
                 </Tooltip>
               </div>
               {open && (
-                <div className="mt-2 flex flex-row gap-2 ">
+                <div className="flex flex-row gap-2 mt-2 ">
                   <Input
                     label="Describe your Blog"
                     required
@@ -294,7 +294,7 @@ export default function CreateBlogPage() {
                   <Button
                     color="green"
                     variant="gradient"
-                    className=" overflow-visible  p-2"
+                    className="p-2 overflow-visible "
                     onClick={generateBlog}
                   >
                     {loading ? (
@@ -324,7 +324,11 @@ export default function CreateBlogPage() {
                   </Button>
                 </div>
               )}
-              {generatedBlog?.length > 0 && <TypingText text={generatedBlog} />}
+              <div className="p-4 mt-2 text-black border border-gray-300 rounded-lg">
+                {generatedBlog?.length > 0 && (
+                  <TypingText text={generatedBlog} />
+                )}
+              </div>
             </div>
 
             <ReactQuill
@@ -354,7 +358,7 @@ export default function CreateBlogPage() {
               />
             </div>
           </CardBody>
-          <CardFooter className="pt-0 flex gap-3">
+          <CardFooter className="flex gap-3 pt-0">
             <Button
               color="indigo"
               variant="gradient"
